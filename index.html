@@ -9,7 +9,7 @@
   <link rel="manifest" href="app.webmanifest">
   <link rel="apple-touch-icon" href="assets/app-icon-180.png">
   <link rel="icon" href="assets/stewart-badge.webp">
-  <link rel="stylesheet" href="assets/catalog.css?v=lyrics-share1">
+  <link rel="stylesheet" href="assets/catalog.css?v=upcoming1">
   <script src="assets/catalog.js" defer></script>
   <script src="assets/install.js" defer></script>
   <script src="assets/share.js" defer></script>
@@ -56,15 +56,31 @@
 
     <div class="wrap">
       <details class="install-app" id="install-app">
-        <summary>Install the app</summary>
-        <p><strong>iPhone:</strong> Open this site in Safari. Tap Share, choose Add to Home Screen, turn on Open as Web App if shown, and tap Add.</p>
-        <p><strong>Chromebook:</strong> In Chrome, use the install icon in the address bar, or open the three-dot menu and choose Cast, save, and share → Install page as app.</p>
+        <summary>
+          <img src="assets/app-icon-192.png" alt="" width="52" height="52">
+          <span class="install-copy">
+            <strong>Stewart Productions app</strong>
+            <span>Add it to your iPhone Home Screen or Chromebook launcher.</span>
+          </span>
+          <span class="install-action">Install app</span>
+        </summary>
+        <div class="install-steps">
+          <p><strong>iPhone:</strong> Open this page in Safari. Tap Share, then Add to Home Screen. Turn on Open as Web App if shown, then tap Add.</p>
+          <p><strong>Chromebook:</strong> In Chrome, use the install icon in the address bar. You can also open the three-dot menu and choose Cast, save, and share → Install page as app.</p>
+        </div>
       </details>
     </div>
 
-    <section class="section wrap" id="new-or-featured" aria-labelledby="new-or-featured-title">
-      <h2 id="new-or-featured-title">New or Featured</h2>
-      <ul class="home-feature-list" id="new-or-featured-items">
+    <section class="section wrap catalog" id="new-or-featured" aria-labelledby="new-or-featured-title">
+      <div class="catalog-heading">
+        <h2 id="new-or-featured-title">New or Featured</h2>
+        <div class="rail-controls" hidden>
+          <button type="button" aria-controls="new-or-featured-items" data-step="-1" aria-label="Scroll featured releases left"><span aria-hidden="true">←</span> Previous</button>
+          <button type="button" aria-controls="new-or-featured-items" data-step="1" aria-label="Scroll featured releases right">Next <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <p class="catalog-hint">Swipe left or right to browse.</p>
+      <ul class="rail home-feature-rail" id="new-or-featured-items" aria-labelledby="new-or-featured-title" tabindex="0">
         <li>
           <a class="home-feature-card" href="singles/stewart-cadets/">
             <img src="https://cdn2.suno.ai/image_large_ec99045a-7a19-461c-95a7-1b7a85fd7dff.jpeg" alt="" loading="lazy">
@@ -84,6 +100,17 @@
           </a>
         </li>
       </ul>
+    </section>
+
+    <section class="section wrap" id="coming-soon" aria-labelledby="coming-soon-title">
+      <h2 id="coming-soon-title">Coming Soon</h2>
+      <div class="upcoming-release">
+        <div>
+          <h3>Thanksgiving Album</h3>
+          <p>John Stewart is working on a collection of songs about giving thanks and seeing God’s provision.</p>
+        </div>
+        <a href="browse/?genre=Thanksgiving">Listen to Thanksgiving songs</a>
+      </div>
     </section>
 
     <section class="section wrap catalog" id="albums" aria-labelledby="albums-title">
