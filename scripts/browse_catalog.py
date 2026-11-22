@@ -6,10 +6,16 @@ import re
 import unicodedata
 
 BROWSE_FILE = "data/browse.json"
-GENRES = ["Funny", "Patriotic", "Thanksgiving", "Christmas", "Faith", "Family & Life", "Cars & Garage"]
+GENRE_GROUPS = [
+    {"title": "Audience & themes", "genres": ["Kids Songs", "Funny", "Faith", "Family & Life", "Story Songs", "Cars & Garage", "Patriotic", "History"]},
+    {"title": "Holidays", "genres": ["Thanksgiving", "Christmas"]},
+    {"title": "Music styles", "genres": ["Rock", "Christian Rock", "Rock & Roll", "Country Rock", "Ballads", "Cinematic", "Hymns & Worship", "A Cappella", "Celtic", "Sing-Alongs", "Spoken Cadence"]},
+]
+GENRES = [genre for group in GENRE_GROUPS for genre in group["genres"]]
+THEMES = set(GENRE_GROUPS[0]["genres"] + GENRE_GROUPS[1]["genres"])
 CURATED = {
-    "holdtheline": ("Patriotic",),
-    "steelandnailprints": ("Patriotic", "Faith"),
+    "holdtheline": ("Patriotic", "History"),
+    "steelandnailprints": ("Patriotic", "Faith", "Story Songs", "History"),
     "garagegospel": ("Faith", "Cars & Garage"),
     "altarsinthewilderness": ("Faith",),
     "battlescars": ("Family & Life",),
@@ -18,15 +24,36 @@ CURATED = {
     "theotherguy": ("Faith",),
     "beforewehangthelights": ("Thanksgiving", "Faith"),
     "areyoustillthankful": ("Thanksgiving",),
+    "godmadethedinosaurs": ("Kids Songs", "Faith"),
+    "nomorestinkyelephants": ("Kids Songs", "Funny"),
+    "thestewartzoo": ("Kids Songs", "Funny"),
+    "allaboardwithdaniel": ("Kids Songs", "Story Songs"),
+    "stewartcadets": ("Kids Songs", "Funny", "Family & Life"),
 }
 PATTERNS = {
-    "Funny": r"\b(comedy|comedic|humou?r(?:ous)?|funny|parody|novelty song)\b",
+    "Funny": r"\b(comedy|comedic|humou?r(?:ous)?|funny|parody|novelty song|wacky)\b",
     "Patriotic": r"\b(patriotic|veterans day|independence day|pearl harbor|national anthem|naval history)\b",
     "Thanksgiving": r"\b(thanksgiving|still thankful)\b",
     "Christmas": r"\b(christmas|nativity|no[eë]l|christmas eve)\b",
     "Faith": r"\b(christian|gospel|worship|hymn|scripture|bible)\b",
     "Family & Life": r"\b(family life|fatherhood|motherhood|family story)\b",
+    "Story Songs": r"\b(storytelling|story song|story ballad)\b",
     "Cars & Garage": r"\b(garage|scirocco|mechanic|check engine|go.kart|car song)\b",
+    "History": r"\b(american history|naval history|historical ballad)\b",
+}
+STYLE_HINTS = {
+    "Kids Songs": r"\b(kids?|children)(?:['’]s?|s)?\s+(music|song|rock|country|singalong|sing along|vocals)\b",
+    "Rock": r"\brock\b",
+    "Christian Rock": r"\bchristian rock\b",
+    "Rock & Roll": r"\brock (?:and|&|['’]?n['’]?) roll\b",
+    "Country Rock": r"\bcountry rock\b",
+    "Ballads": r"\bballads?\b",
+    "Cinematic": r"\bcinematic\b",
+    "Hymns & Worship": r"\b(hymns?|worship)\b",
+    "A Cappella": r"\ba cap+pella\b",
+    "Celtic": r"\bceltic\b",
+    "Sing-Alongs": r"\b(singalong|sing along|call and response)\b",
+    "Spoken Cadence": r"\b(marching cadence|marching drill)\b",
 }
 RAIL_TYPES = {"albums-track": "Album", "singles-track": "Single", "featured-track": "Video"}
 
@@ -40,6 +67,8 @@ def classify(title, hints="", inherited=()):
     genres = set(inherited) | set(CURATED.get(title_key(title), ()))
     text = (title + " " + hints).replace("-", " ").casefold()
     genres.update(genre for genre, pattern in PATTERNS.items() if re.search(pattern, text))
+    style = hints.replace("-", " ").casefold()
+    genres.update(genre for genre, pattern in STYLE_HINTS.items() if re.search(pattern, style))
     return [genre for genre in GENRES if genre in genres]
 
 
@@ -83,9 +112,11 @@ def build_index(homepage, releases, album_songs, previous, scores):
         if album_songs is None or key not in album_songs:
             items.extend(track for track in previous.get("items", []) if track.get("kind") == "Album track" and track.get("href") == href)
             continue
-        for title, count, embed in album_songs.get(key, ()):
+        inherited = [genre for genre in item["genres"] if genre in THEMES]
+        for title, count, embed, track_hint in album_songs.get(key, ()):
+            tags = " ".join(filter(None, (hints.get(title_key(title)), track_hint)))
             track = {"title": title, "kind": "Album track", "album": album_title, "href": href,
-                     "genres": classify(title, hints.get(title_key(title), ""), item["genres"]), "embed": embed}
+                     "genres": classify(title, tags, inherited), "embed": embed}
             previous_track = legacy.get(("Album track", href, title_key(title)), {})
             if count is None:
                 count = previous_track.get("likes")
@@ -93,7 +124,7 @@ def build_index(homepage, releases, album_songs, previous, scores):
                 track["likes"], track["metric"] = count, "favorite"
             items.append(track)
 
-    return {"genres": GENRES, "items": items}
+    return {"genres": GENRES, "genreGroups": GENRE_GROUPS, "items": items}
 
 
 def serialize(index):

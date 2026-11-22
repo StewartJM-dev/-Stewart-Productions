@@ -134,6 +134,7 @@ def audiomack_releases(document):
             title, "audiomack:" + str(item["id"]), slug, image,
             AUDIOMACK + path, AUDIOMACK + "/embed" + path, "Audiomack",
             int(item.get("trackCount") or 0),
+            tags=item.get("genre") if isinstance(item.get("genre"), str) else "",
             likes=public_count((item.get("stats") or {}).get("favorites-raw")),
         ))
     return releases, album_tracks
@@ -217,7 +218,7 @@ def audiomack_catalog():
         if not links or album.tracks and len(links) < album.tracks:
             raise ValueError(f"Incomplete Audiomack tracklist for {album.title}")
         verified = set(links)
-        titles, votes = {}, {}
+        titles, votes, tags = {}, {}, {}
         for payload in structured_data(document):
             for item in objects(payload):
                 path, title = item.get("href"), item.get("title")
@@ -225,6 +226,8 @@ def audiomack_catalog():
                     slug = path.rsplit("/", 1)[1]
                     if slug in verified:
                         titles[slug] = title
+                        if isinstance(item.get("genre"), str):
+                            tags[slug] = item["genre"]
                         count = public_count((item.get("stats") or {}).get("favorites-raw"))
                         if count is not None:
                             votes[slug] = count
@@ -236,7 +239,8 @@ def audiomack_catalog():
                 name = re.sub(r"-+", " ", name).strip()
             return name
 
-        tracks = [(readable(slug), votes.get(slug), f"{AUDIOMACK}/embed/stewartjm/song/{slug}") for slug in links]
+        tracks = [(readable(slug), votes.get(slug), f"{AUDIOMACK}/embed/stewartjm/song/{slug}", tags.get(slug, ""))
+                  for slug in links]
         return title_key(album.title), tracks, {title_key(slug) for slug in links}
 
     album_songs = {}

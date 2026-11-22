@@ -1,12 +1,64 @@
 {
   "genres": [
+    "Kids Songs",
     "Funny",
-    "Patriotic",
-    "Thanksgiving",
-    "Christmas",
     "Faith",
     "Family & Life",
-    "Cars & Garage"
+    "Story Songs",
+    "Cars & Garage",
+    "Patriotic",
+    "History",
+    "Thanksgiving",
+    "Christmas",
+    "Rock",
+    "Christian Rock",
+    "Rock & Roll",
+    "Country Rock",
+    "Ballads",
+    "Cinematic",
+    "Hymns & Worship",
+    "A Cappella",
+    "Celtic",
+    "Sing-Alongs",
+    "Spoken Cadence"
+  ],
+  "genreGroups": [
+    {
+      "title": "Audience & themes",
+      "genres": [
+        "Kids Songs",
+        "Funny",
+        "Faith",
+        "Family & Life",
+        "Story Songs",
+        "Cars & Garage",
+        "Patriotic",
+        "History"
+      ]
+    },
+    {
+      "title": "Holidays",
+      "genres": [
+        "Thanksgiving",
+        "Christmas"
+      ]
+    },
+    {
+      "title": "Music styles",
+      "genres": [
+        "Rock",
+        "Christian Rock",
+        "Rock & Roll",
+        "Country Rock",
+        "Ballads",
+        "Cinematic",
+        "Hymns & Worship",
+        "A Cappella",
+        "Celtic",
+        "Sing-Alongs",
+        "Spoken Cadence"
+      ]
+    }
   ],
   "items": [
     {
@@ -15,7 +67,8 @@
       "href": "albums/garage-gospel/",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "likes": 1,
       "metric": "favorite"
@@ -25,7 +78,9 @@
       "kind": "Album",
       "href": "albums/hold-the-line/",
       "genres": [
-        "Patriotic"
+        "Patriotic",
+        "History",
+        "Rock"
       ],
       "likes": 0,
       "metric": "favorite"
@@ -35,7 +90,8 @@
       "kind": "Album",
       "href": "albums/altars-in-the-wilderness/",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock"
       ],
       "likes": 0,
       "metric": "favorite"
@@ -45,7 +101,8 @@
       "kind": "Album",
       "href": "albums/battle-scars/",
       "genres": [
-        "Family & Life"
+        "Family & Life",
+        "Rock"
       ],
       "likes": 0,
       "metric": "favorite"
@@ -55,7 +112,9 @@
       "kind": "Single",
       "href": "singles/enough/",
       "genres": [
-        "Faith"
+        "Faith",
+        "Hymns & Worship",
+        "A Cappella"
       ],
       "likes": 1,
       "metric": "like"
@@ -65,7 +124,9 @@
       "kind": "Single",
       "href": "singles/still-a-reason/",
       "genres": [
-        "Faith"
+        "Faith",
+        "Hymns & Worship",
+        "Celtic"
       ],
       "likes": 1,
       "metric": "like"
@@ -75,7 +136,9 @@
       "kind": "Single",
       "href": "singles/no-more-stinky-elephants/",
       "genres": [
-        "Funny"
+        "Kids Songs",
+        "Funny",
+        "Sing-Alongs"
       ],
       "likes": 1,
       "metric": "like"
@@ -84,7 +147,13 @@
       "title": "God Made the Dinosaurs",
       "kind": "Single",
       "href": "singles/god-made-the-dinosaurs/",
-      "genres": [],
+      "genres": [
+        "Kids Songs",
+        "Faith",
+        "Rock",
+        "Rock & Roll",
+        "Sing-Alongs"
+      ],
       "likes": 1,
       "metric": "like"
     },
@@ -93,7 +162,10 @@
       "kind": "Single",
       "href": "singles/are-you-still-thankful/",
       "genres": [
-        "Thanksgiving"
+        "Story Songs",
+        "Thanksgiving",
+        "Ballads",
+        "Cinematic"
       ],
       "likes": 1,
       "metric": "like"
@@ -103,8 +175,10 @@
       "kind": "Single",
       "href": "singles/before-we-hang-the-lights/",
       "genres": [
+        "Faith",
+        "Story Songs",
         "Thanksgiving",
-        "Faith"
+        "Ballads"
       ],
       "likes": 1,
       "metric": "like"
@@ -114,7 +188,9 @@
       "kind": "Single",
       "href": "singles/el-roi/",
       "genres": [
-        "Faith"
+        "Faith",
+        "Ballads",
+        "Cinematic"
       ],
       "likes": 0,
       "metric": "like"
@@ -123,7 +199,12 @@
       "title": "Stewart Cadets",
       "kind": "Single",
       "href": "singles/stewart-cadets/",
-      "genres": [],
+      "genres": [
+        "Kids Songs",
+        "Funny",
+        "Family & Life",
+        "Spoken Cadence"
+      ],
       "likes": 0,
       "metric": "like"
     },
@@ -131,7 +212,13 @@
       "title": "THE STEWART ZOO",
       "kind": "Single",
       "href": "singles/the-stewart-zoo/",
-      "genres": [],
+      "genres": [
+        "Kids Songs",
+        "Funny",
+        "Rock",
+        "Rock & Roll",
+        "Sing-Alongs"
+      ],
       "likes": 0,
       "metric": "like"
     },
@@ -139,7 +226,13 @@
       "title": "All AboardWith Daniel",
       "kind": "Single",
       "href": "singles/all-aboardwith-daniel/",
-      "genres": [],
+      "genres": [
+        "Kids Songs",
+        "Story Songs",
+        "Rock",
+        "Country Rock",
+        "Sing-Alongs"
+      ],
       "likes": 0,
       "metric": "like"
     },
@@ -148,7 +241,11 @@
       "kind": "Single",
       "href": "singles/the-other-guy/",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock",
+        "Christian Rock",
+        "Ballads",
+        "Cinematic"
       ],
       "likes": 0,
       "metric": "like"
@@ -158,7 +255,8 @@
       "kind": "Single",
       "href": "singles/black-scirocco/",
       "genres": [
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "likes": 0,
       "metric": "favorite"
@@ -168,7 +266,8 @@
       "kind": "Single",
       "href": "singles/memory-red/",
       "genres": [
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "likes": 0,
       "metric": "favorite"
@@ -178,8 +277,12 @@
       "kind": "Video",
       "href": "videos/steel-and-nail-prints/",
       "genres": [
+        "Faith",
+        "Story Songs",
         "Patriotic",
-        "Faith"
+        "History",
+        "Rock",
+        "Christian Rock"
       ],
       "likes": 8,
       "metric": "like"
@@ -197,7 +300,11 @@
       "kind": "Video",
       "href": "videos/the-other-guy/",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock",
+        "Christian Rock",
+        "Ballads",
+        "Cinematic"
       ],
       "likes": 2,
       "metric": "like"
@@ -209,7 +316,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/dream-garage"
     },
@@ -220,7 +328,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/check-engine-light"
     },
@@ -231,7 +340,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/smoke-and-noise"
     },
@@ -242,7 +352,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/restored"
     },
@@ -253,7 +364,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/recalculating"
     },
@@ -264,7 +376,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/who-s-driving"
     },
@@ -275,7 +388,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/rear-view-mirror"
     },
@@ -286,7 +400,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/learning-stick"
     },
@@ -297,7 +412,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/little-bike-big-god"
     },
@@ -308,7 +424,8 @@
       "href": "albums/garage-gospel/#listen",
       "genres": [
         "Faith",
-        "Cars & Garage"
+        "Cars & Garage",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/fix-whats-broke"
     },
@@ -318,7 +435,9 @@
       "album": "Hold the Line",
       "href": "albums/hold-the-line/#listen",
       "genres": [
-        "Patriotic"
+        "Patriotic",
+        "History",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/hold-the-line"
     },
@@ -328,7 +447,9 @@
       "album": "Hold the Line",
       "href": "albums/hold-the-line/#listen",
       "genres": [
-        "Patriotic"
+        "Patriotic",
+        "History",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/not-yet-begun"
     },
@@ -338,7 +459,9 @@
       "album": "Hold the Line",
       "href": "albums/hold-the-line/#listen",
       "genres": [
-        "Patriotic"
+        "Patriotic",
+        "History",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/old-ironsides"
     },
@@ -348,7 +471,9 @@
       "album": "Hold the Line",
       "href": "albums/hold-the-line/#listen",
       "genres": [
-        "Patriotic"
+        "Patriotic",
+        "History",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/the-monitor-and-the-merrimack"
     },
@@ -358,7 +483,9 @@
       "album": "Hold the Line",
       "href": "albums/hold-the-line/#listen",
       "genres": [
-        "Patriotic"
+        "Patriotic",
+        "History",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/still-there"
     },
@@ -368,7 +495,9 @@
       "album": "Hold the Line",
       "href": "albums/hold-the-line/#listen",
       "genres": [
-        "Patriotic"
+        "Patriotic",
+        "History",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/every-shot-counts"
     },
@@ -378,7 +507,9 @@
       "album": "Hold the Line",
       "href": "albums/hold-the-line/#listen",
       "genres": [
-        "Patriotic"
+        "Patriotic",
+        "History",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/one-life"
     },
@@ -388,8 +519,12 @@
       "album": "Hold the Line",
       "href": "albums/hold-the-line/#listen",
       "genres": [
+        "Faith",
+        "Story Songs",
         "Patriotic",
-        "Faith"
+        "History",
+        "Rock",
+        "Christian Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/steel-and-nail-prints"
     },
@@ -399,7 +534,8 @@
       "album": "Altars in the Wilderness",
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/altars-in-the-wilderness"
     },
@@ -409,7 +545,8 @@
       "album": "Altars in the Wilderness",
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/stand-still"
     },
@@ -419,7 +556,8 @@
       "album": "Altars in the Wilderness",
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/man-of-prayer"
     },
@@ -429,7 +567,8 @@
       "album": "Altars in the Wilderness",
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/broken-pitchers"
     },
@@ -439,7 +578,8 @@
       "album": "Altars in the Wilderness",
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/mount-carmel"
     },
@@ -449,7 +589,8 @@
       "album": "Altars in the Wilderness",
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/lord-light-it-again"
     },
@@ -459,7 +600,8 @@
       "album": "Altars in the Wilderness",
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
-        "Faith"
+        "Faith",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/walk-worthy"
     },
@@ -469,7 +611,8 @@
       "album": "Battle Scars",
       "href": "albums/battle-scars/#listen",
       "genres": [
-        "Family & Life"
+        "Family & Life",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/battle-scars-remix"
     },
@@ -479,7 +622,8 @@
       "album": "Battle Scars",
       "href": "albums/battle-scars/#listen",
       "genres": [
-        "Family & Life"
+        "Family & Life",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/lilacs"
     },
@@ -489,7 +633,8 @@
       "album": "Battle Scars",
       "href": "albums/battle-scars/#listen",
       "genres": [
-        "Family & Life"
+        "Family & Life",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/three-strands"
     },
@@ -499,7 +644,8 @@
       "album": "Battle Scars",
       "href": "albums/battle-scars/#listen",
       "genres": [
-        "Family & Life"
+        "Family & Life",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/loud-for-timothy"
     },
@@ -509,7 +655,8 @@
       "album": "Battle Scars",
       "href": "albums/battle-scars/#listen",
       "genres": [
-        "Family & Life"
+        "Family & Life",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/final-heartbeat-remix"
     },
@@ -519,7 +666,8 @@
       "album": "Battle Scars",
       "href": "albums/battle-scars/#listen",
       "genres": [
-        "Family & Life"
+        "Family & Life",
+        "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/everyone-s-story"
     }

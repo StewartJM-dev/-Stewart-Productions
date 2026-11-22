@@ -19,7 +19,9 @@ async function start() {
     ...item,
     search: fold([item.title, item.album, item.kind, ...item.genres].filter(Boolean).join(" ")),
   }));
-  const buttons = ["All", ...catalog.genres].map(genre => {
+  const buttons = [];
+
+  function addFilter(container, genre) {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = genre;
@@ -27,9 +29,27 @@ async function start() {
       selected = genre;
       update();
     });
-    controls.append(button);
-    return button;
-  });
+    container.append(button);
+    buttons.push(button);
+  }
+
+  const all = document.createElement("div");
+  addFilter(all, "All");
+  controls.append(all);
+  const groups = catalog.genreGroups || [{ title: "Genres", genres: catalog.genres }];
+  for (const group of groups) {
+    const block = document.createElement("div");
+    block.className = "genre-group";
+    const heading = document.createElement("h3");
+    heading.textContent = group.title;
+    const options = document.createElement("div");
+    options.className = "genre-options";
+    options.setAttribute("role", "group");
+    options.setAttribute("aria-label", group.title);
+    for (const genre of group.genres) addFilter(options, genre);
+    block.append(heading, options);
+    controls.append(block);
+  }
 
   function update(updateUrl = true) {
     const query = fold(input.value).split(" ").filter(Boolean);
@@ -52,6 +72,11 @@ async function start() {
       detail.textContent = Number.isSafeInteger(count) ?
         label + " · " + count.toLocaleString() + " " + item.metric + (count === 1 ? "" : "s") : label;
       row.append(link, detail);
+      if (selected === "All" && item.genres.length) {
+        const tags = document.createElement("p");
+        tags.textContent = item.genres.join(" · ");
+        row.append(tags);
+      }
       results.append(row);
     }
 

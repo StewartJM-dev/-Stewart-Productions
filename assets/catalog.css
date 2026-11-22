@@ -274,7 +274,9 @@ iframe { width: 100%; display: block; border: 0; border-radius: .3rem; backgroun
 .search-controls input { flex: 1; min-width: 0; }
 .search-controls button, .genre-filters button { cursor: pointer; font-weight: 700; }
 .search-controls button, .genre-filters button[aria-pressed="true"] { background: var(--forest); color: var(--cream); }
-.genre-filters { display: flex; flex-wrap: wrap; gap: .5rem; }
+.genre-filters { display: grid; gap: 1rem; }
+.genre-group h3 { margin-bottom: .45rem; color: var(--ink); font-size: .97rem; }
+.genre-options { display: flex; flex-wrap: wrap; gap: .5rem; }
 #browse-status { margin-top: 1.55rem; }
 .browse-results { padding: 0; margin: .7rem 0 0; list-style: none; border-block-start: 1px solid var(--line); }
 .browse-results:empty { border: 0; }
