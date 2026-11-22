@@ -257,6 +257,37 @@ def card_html(release, route):
 '''
 
 
+def feature_releases(homepage, routes):
+    match = re.search(r'<ul\b[^>]*\bid="new-or-featured-items"[^>]*>(.*?)</ul>', homepage, re.S)
+    if not match:
+        return homepage
+    previous = re.findall(r'href="((?:albums|singles|videos)/[a-zA-Z0-9_-]+/)"', match[1])
+    selected = list(dict.fromkeys([*routes, *previous]))[:3]
+    cards = {}
+    rows = existing_cards(homepage)
+    for category, kind in (("albums", "Album"), ("singles", "Single"), ("videos", "Video")):
+        row = rows[category][0]
+        for card in re.finditer(r'<li\b[^>]*>(.*?)</li>', row[1], re.S):
+            href = re.search(r'href="([^"]+)"', card[1])
+            image = re.search(r'<img\b[^>]*\bsrc="([^"]+)"', card[1])
+            title = re.search(r'<h3>([^<]+)</h3>', card[1])
+            if href and image and title:
+                cards[href[1]] = (image[1], title[1], kind)
+    featured = []
+    for route in selected:
+        if route not in cards:
+            continue
+        image, title, kind = cards[route]
+        featured.append(f'''        <li>
+          <a class="home-feature-card" href="{route}">
+            <img src="{image}" alt="" loading="lazy">
+            <div><p>{kind}</p><h3>{title}</h3></div>
+          </a>
+        </li>
+''')
+    return homepage[:match.start(1)] + "\n" + "".join(featured) + "      " + homepage[match.end(1):]
+
+
 def extract(layout, pattern):
     match = re.search(pattern, layout, re.S)
     if not match:
@@ -282,6 +313,8 @@ def site_page(layout, title, main, depth, current=None, load_rails=False):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#164632">
   <title>{title} | Stewart Productions</title>
+  <link rel="manifest" href="{prefix}app.webmanifest">
+  <link rel="apple-touch-icon" href="{prefix}assets/app-icon-180.png">
   <link rel="icon" href="{prefix}assets/stewart-badge.webp">
   <link rel="stylesheet" href="{prefix}assets/catalog.css">{rails}
 </head>
@@ -375,6 +408,7 @@ def plan(homepage, releases, album_tracks):
             homepage = homepage[:start] + "".join(new_cards) + homepage[start:]
             changed_categories.append(category)
     if changes:
+        homepage = feature_releases(homepage, [release["route"] for release in added])
         changes["index.html"] = homepage
         for category in changed_categories:
             changes[f"{category}/index.html"] = category_page(category, homepage)

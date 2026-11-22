@@ -6,9 +6,12 @@
   <meta name="description" content="Original songs and music videos by John Stewart. Listen to Hold the Line and watch Steel and Nail Prints.">
   <meta name="theme-color" content="#164632">
   <title>Stewart Productions | Music by John Stewart</title>
+  <link rel="manifest" href="app.webmanifest">
+  <link rel="apple-touch-icon" href="assets/app-icon-180.png">
   <link rel="icon" href="assets/stewart-badge.webp">
-  <link rel="stylesheet" href="assets/catalog.css">
+  <link rel="stylesheet" href="assets/catalog.css?v=featured1">
   <script src="assets/catalog.js" defer></script>
+  <script src="assets/install.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -41,6 +44,38 @@
         </div>
         <a class="button" href="albums/">Explore the albums</a>
       </div>
+    </section>
+
+    <div class="wrap">
+      <details class="install-app" id="install-app">
+        <summary>Install the app</summary>
+        <p><strong>iPhone:</strong> Open this site in Safari. Tap Share, choose Add to Home Screen, turn on Open as Web App if shown, and tap Add.</p>
+        <p><strong>Chromebook:</strong> In Chrome, use the install icon in the address bar, or open the three-dot menu and choose Cast, save, and share → Install page as app.</p>
+      </details>
+    </div>
+
+    <section class="section wrap" id="new-or-featured" aria-labelledby="new-or-featured-title">
+      <h2 id="new-or-featured-title">New or Featured</h2>
+      <ul class="home-feature-list" id="new-or-featured-items">
+        <li>
+          <a class="home-feature-card" href="singles/no-more-stinky-elephants/">
+            <img src="https://cdn2.suno.ai/image_large_48febd33-3ff1-4501-849f-bfa8ef03b7ec.jpeg" alt="" loading="lazy">
+            <div><p>Single</p><h3>No More Stinky Elephants</h3></div>
+          </a>
+        </li>
+        <li>
+          <a class="home-feature-card" href="singles/god-made-the-dinosaurs/">
+            <img src="https://cdn2.suno.ai/image_large_3d7d0e6a-d02d-44de-8ad7-03545577e48c.jpeg" alt="" loading="lazy">
+            <div><p>Single</p><h3>God Made the Dinosaurs</h3></div>
+          </a>
+        </li>
+        <li>
+          <a class="home-feature-card" href="videos/steel-and-nail-prints/">
+            <img src="https://i.ytimg.com/vi/kupLLm1yda8/mqdefault.jpg" alt="" loading="lazy">
+            <div><p>Video</p><h3>Steel and Nail Prints</h3></div>
+          </a>
+        </li>
+      </ul>
     </section>
 
     <section class="section wrap catalog" id="albums" aria-labelledby="albums-title">
