@@ -9,7 +9,7 @@
   <link rel="manifest" href="app.webmanifest">
   <link rel="apple-touch-icon" href="assets/app-icon-180.png">
   <link rel="icon" href="assets/stewart-badge.webp">
-  <link rel="stylesheet" href="assets/catalog.css?v=red-trim1">
+  <link rel="stylesheet" href="assets/catalog.css?v=playlist1">
   <script src="assets/catalog.js" defer></script>
   <script src="assets/install.js" defer></script>
   <script src="assets/share.js" defer></script>
@@ -45,6 +45,7 @@
         </div>
         <div class="hero-actions">
           <a class="button" href="albums/">Explore the albums</a>
+          <a class="button playlist-home-link" href="playlist/">My Playlist</a>
       <div class="share-control" data-share-control hidden>
         <button type="button" data-share-button>Share</button>
         <span data-share-status role="status"></span>
@@ -82,21 +83,21 @@
       <p class="catalog-hint">Swipe left or right to browse.</p>
       <ul class="rail home-feature-rail" id="new-or-featured-items" aria-labelledby="new-or-featured-title" tabindex="0">
         <li data-feature-order="0">
-          <a class="home-feature-card" href="singles/el-roi/">
-            <img src="https://cdn2.suno.ai/image_large_80b64039-6cfd-425f-b49a-10b336b52b43.jpeg" alt="" loading="lazy">
-            <div><p>Single</p><h3>El Roi</h3><p class="release-popularity">0 likes</p></div>
+          <a class="home-feature-card" href="singles/enough/">
+            <img src="https://cdn2.suno.ai/image_large_e7b836d0-523f-46f0-9100-a8c891e58859.jpeg" alt="" loading="lazy">
+            <div><p>Single</p><h3>Enough</h3><p class="release-popularity">1 like</p></div>
           </a>
         </li>
         <li data-feature-order="1">
-          <a class="home-feature-card" href="singles/stewart-cadets/">
-            <img src="https://cdn2.suno.ai/image_large_ec99045a-7a19-461c-95a7-1b7a85fd7dff.jpeg" alt="" loading="lazy">
-            <div><p>Single</p><h3>Stewart Cadets</h3><p class="release-popularity">0 likes</p></div>
+          <a class="home-feature-card" href="singles/still-a-reason/">
+            <img src="https://cdn2.suno.ai/image_large_70529091-86b6-4746-ab67-c008211a3455.jpeg" alt="" loading="lazy">
+            <div><p>Single</p><h3>Still A Reason</h3><p class="release-popularity">1 like</p></div>
           </a>
         </li>
         <li data-feature-order="2">
-          <a class="home-feature-card" href="singles/the-stewart-zoo/">
-            <img src="https://cdn2.suno.ai/image_large_fc7c01a7-da0f-4946-86d3-7f572807b2c8.jpeg" alt="" loading="lazy">
-            <div><p>Single</p><h3>THE STEWART ZOO</h3><p class="release-popularity">0 likes</p></div>
+          <a class="home-feature-card" href="singles/el-roi/">
+            <img src="https://cdn2.suno.ai/image_large_80b64039-6cfd-425f-b49a-10b336b52b43.jpeg" alt="" loading="lazy">
+            <div><p>Single</p><h3>El Roi</h3><p class="release-popularity">0 likes</p></div>
           </a>
         </li>
       </ul>
@@ -176,6 +177,24 @@
       </div>
       <p class="catalog-hint">Swipe left or right to browse.</p>
       <ul class="rail albums-rail" id="singles-track" aria-labelledby="singles-title" tabindex="0">
+        <li>
+          <a class="catalog-card" href="singles/enough/" data-release-id="suno:e7b836d0-523f-46f0-9100-a8c891e58859">
+            <img src="https://cdn2.suno.ai/image_large_e7b836d0-523f-46f0-9100-a8c891e58859.jpeg" alt="" width="700" height="700" loading="lazy">
+            <div class="card-copy">
+              <h3>Enough</h3>
+              <p class="release-popularity">1 like</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="catalog-card" href="singles/still-a-reason/" data-release-id="suno:70529091-86b6-4746-ab67-c008211a3455">
+            <img src="https://cdn2.suno.ai/image_large_70529091-86b6-4746-ab67-c008211a3455.jpeg" alt="" width="700" height="700" loading="lazy">
+            <div class="card-copy">
+              <h3>Still A Reason</h3>
+              <p class="release-popularity">1 like</p>
+            </div>
+          </a>
+        </li>
         <li>
           <a class="catalog-card" href="singles/no-more-stinky-elephants/" data-release-id="suno:48febd33-3ff1-4501-849f-bfa8ef03b7ec">
             <img src="https://cdn2.suno.ai/image_large_48febd33-3ff1-4501-849f-bfa8ef03b7ec.jpeg" alt="" width="700" height="700" loading="lazy">
@@ -331,6 +350,7 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <span>Stewart Productions</span>
+      <a href="playlist/">My Playlist</a>
       <nav aria-label="Music platforms">
         <a href="https://audiomack.com/stewartjm">Audiomack</a>
         <a href="https://suno.com/@stewartjm">Suno</a>

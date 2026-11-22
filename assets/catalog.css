@@ -386,3 +386,24 @@ iframe { width: 100%; display: block; border: 0; border-radius: .3rem; backgroun
 .install-app, .upcoming-release { background: var(--red); border-color: var(--gold-light); color: var(--cream); }
 .upcoming-release p, .upcoming-release a { color: var(--cream); }
 .release-popularity { font-size: .9rem; }
+
+.playlist-home-link { background: var(--panel); }
+.playlist-page { padding-block: clamp(2rem, 6vw, 4rem); }
+#playlist-name-form { margin-block: 1rem; }
+#playlist-name-form label { display: block; font-weight: 700; }
+#playlist-name-form input { max-width: 100%; padding: .45rem .65rem; border: 1px solid var(--line); border-radius: .25rem; background: var(--panel); color: var(--ink); font: inherit; }
+.playlist-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .75rem; margin-top: .65rem; }
+.playlist-actions button { min-height: 2.75rem; padding: .45rem .75rem; border: 1px solid var(--line); border-radius: .3rem; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.playlist-actions button:hover:not(:disabled) { background: var(--cream); }
+.playlist-actions button:disabled { opacity: .5; cursor: default; }
+.playlist-actions [role="status"]:empty { display: none; }
+.playlist-actions [role="status"] { font-size: .9rem; }
+.playlist-track-picker { max-width: 60rem; margin-top: .8rem; padding: .7rem 1rem; border: 1px solid var(--line); border-top: 3px solid var(--red-trim); border-radius: .35rem; background: var(--cream); }
+.playlist-track-picker summary { cursor: pointer; font-weight: 700; }
+.playlist-album-tracks { padding: 0; list-style: none; }
+.playlist-album-tracks li { padding: .55rem 0; border-bottom: 1px solid var(--line); }
+.playlist-queue { padding: 0; list-style: none; }
+.playlist-queue li { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .4rem 1rem; padding: .8rem .1rem; border-bottom: 1px solid var(--line); }
+.playlist-queue li .playlist-actions { margin-top: 0; }
+.playlist-song-player { height: 252px; }
+.playlist-discover { margin-top: 1.25rem; }

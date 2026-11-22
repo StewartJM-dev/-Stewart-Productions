@@ -51,6 +51,26 @@
       "metric": "favorite"
     },
     {
+      "title": "Enough",
+      "kind": "Single",
+      "href": "singles/enough/",
+      "genres": [
+        "Faith"
+      ],
+      "likes": 1,
+      "metric": "like"
+    },
+    {
+      "title": "Still A Reason",
+      "kind": "Single",
+      "href": "singles/still-a-reason/",
+      "genres": [
+        "Faith"
+      ],
+      "likes": 1,
+      "metric": "like"
+    },
+    {
       "title": "No More Stinky Elephants",
       "kind": "Single",
       "href": "singles/no-more-stinky-elephants/",
@@ -190,7 +210,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/dream-garage"
     },
     {
       "title": "Check Engine Light",
@@ -200,7 +221,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/check-engine-light"
     },
     {
       "title": "Smoke and Noise",
@@ -210,7 +232,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/smoke-and-noise"
     },
     {
       "title": "Restored",
@@ -220,7 +243,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/restored"
     },
     {
       "title": "Recalculating",
@@ -230,7 +254,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/recalculating"
     },
     {
       "title": "Who’s Driving",
@@ -240,7 +265,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/who-s-driving"
     },
     {
       "title": "Rear View Mirror",
@@ -250,7 +276,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/rear-view-mirror"
     },
     {
       "title": "Learning Stick",
@@ -260,7 +287,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/learning-stick"
     },
     {
       "title": "Little Bike Big God",
@@ -270,7 +298,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/little-bike-big-god"
     },
     {
       "title": "Fix Whats Broke",
@@ -280,7 +309,8 @@
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/fix-whats-broke"
     },
     {
       "title": "Hold The Line",
@@ -289,7 +319,8 @@
       "href": "albums/hold-the-line/#listen",
       "genres": [
         "Patriotic"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/hold-the-line"
     },
     {
       "title": "Not Yet Begun",
@@ -298,7 +329,8 @@
       "href": "albums/hold-the-line/#listen",
       "genres": [
         "Patriotic"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/not-yet-begun"
     },
     {
       "title": "Old Ironsides",
@@ -307,7 +339,8 @@
       "href": "albums/hold-the-line/#listen",
       "genres": [
         "Patriotic"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/old-ironsides"
     },
     {
       "title": "THE MONITOR AND THE MERRIMACK",
@@ -316,7 +349,8 @@
       "href": "albums/hold-the-line/#listen",
       "genres": [
         "Patriotic"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/the-monitor-and-the-merrimack"
     },
     {
       "title": "Still There",
@@ -325,7 +359,8 @@
       "href": "albums/hold-the-line/#listen",
       "genres": [
         "Patriotic"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/still-there"
     },
     {
       "title": "Every Shot Counts",
@@ -334,7 +369,8 @@
       "href": "albums/hold-the-line/#listen",
       "genres": [
         "Patriotic"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/every-shot-counts"
     },
     {
       "title": "One Life",
@@ -343,7 +379,8 @@
       "href": "albums/hold-the-line/#listen",
       "genres": [
         "Patriotic"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/one-life"
     },
     {
       "title": "Steel and Nail Prints",
@@ -353,7 +390,8 @@
       "genres": [
         "Patriotic",
         "Faith"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/steel-and-nail-prints"
     },
     {
       "title": "Altars in the Wilderness",
@@ -362,7 +400,8 @@
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
         "Faith"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/altars-in-the-wilderness"
     },
     {
       "title": "Stand Still",
@@ -371,7 +410,8 @@
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
         "Faith"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/stand-still"
     },
     {
       "title": "Man of Prayer",
@@ -380,7 +420,8 @@
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
         "Faith"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/man-of-prayer"
     },
     {
       "title": "Broken Pitchers",
@@ -389,7 +430,8 @@
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
         "Faith"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/broken-pitchers"
     },
     {
       "title": "Mount Carmel",
@@ -398,7 +440,8 @@
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
         "Faith"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/mount-carmel"
     },
     {
       "title": "Lord light it again",
@@ -407,7 +450,8 @@
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
         "Faith"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/lord-light-it-again"
     },
     {
       "title": "Walk Worthy",
@@ -416,7 +460,8 @@
       "href": "albums/altars-in-the-wilderness/#listen",
       "genres": [
         "Faith"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/walk-worthy"
     },
     {
       "title": "Battle Scars remix",
@@ -425,7 +470,8 @@
       "href": "albums/battle-scars/#listen",
       "genres": [
         "Family & Life"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/battle-scars-remix"
     },
     {
       "title": "Lilacs",
@@ -434,7 +480,8 @@
       "href": "albums/battle-scars/#listen",
       "genres": [
         "Family & Life"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/lilacs"
     },
     {
       "title": "Three Strands",
@@ -443,7 +490,8 @@
       "href": "albums/battle-scars/#listen",
       "genres": [
         "Family & Life"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/three-strands"
     },
     {
       "title": "Loud for Timothy",
@@ -452,7 +500,8 @@
       "href": "albums/battle-scars/#listen",
       "genres": [
         "Family & Life"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/loud-for-timothy"
     },
     {
       "title": "Final Heartbeat remix",
@@ -461,7 +510,8 @@
       "href": "albums/battle-scars/#listen",
       "genres": [
         "Family & Life"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/final-heartbeat-remix"
     },
     {
       "title": "Everyone’s Story",
@@ -470,7 +520,8 @@
       "href": "albums/battle-scars/#listen",
       "genres": [
         "Family & Life"
-      ]
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/everyone-s-story"
     }
   ]
 }

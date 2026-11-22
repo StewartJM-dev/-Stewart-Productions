@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#164632">
+  <title>My Playlist | Stewart Productions</title>
+  <link rel="manifest" href="../app.webmanifest">
+  <link rel="apple-touch-icon" href="../assets/app-icon-180.png">
+  <link rel="icon" href="../assets/stewart-badge.webp">
+  <link rel="stylesheet" href="../assets/catalog.css?v=playlist1">
+  <script src="../assets/playlist.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark brand" href="../">
+        <img src="../assets/stewart-badge.webp" alt="" width="44" height="44">
+        <span>Stewart Productions</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="../">Home</a>
+        <a href="../albums/">Albums</a>
+        <a href="../singles/">Singles</a>
+        <a href="../videos/">Videos</a>
+        <a href="../about/">About</a>
+        <a href="../browse/">Search &amp; Genres</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap playlist-page" id="playlist-page">
+    <h1 id="main">My Playlist</h1>
+    <form id="playlist-name-form">
+      <label for="playlist-name">Playlist name</label>
+      <div class="playlist-actions">
+        <input id="playlist-name" maxlength="80" autocomplete="off" value="My Playlist">
+        <button type="submit">Save name</button>
+      </div>
+    </form>
+
+    <section class="section playlist-playback" id="playlist-playback" aria-labelledby="playlist-current" hidden>
+      <h2 id="playlist-current"></h2>
+      <div class="media-card" id="playlist-player"></div>
+      <div class="playlist-actions">
+        <button type="button" id="playlist-previous">Previous</button>
+        <button type="button" id="playlist-next">Next</button>
+      </div>
+    </section>
+
+    <p id="playlist-status" role="status"></p>
+    <ol class="playlist-queue" id="playlist-queue"></ol>
+    <p class="playlist-discover">Find more music in <a href="../albums/">Albums</a>, <a href="../singles/">Singles</a>, or <a href="../videos/">Videos</a>.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Stewart Productions</span>
+      <a href="../playlist/">My Playlist</a>
+      <nav aria-label="Music platforms">
+        <a href="https://audiomack.com/stewartjm">Audiomack</a>
+        <a href="https://suno.com/@stewartjm">Suno</a>
+        <a href="https://www.youtube.com/@stewartproductions1982">YouTube</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

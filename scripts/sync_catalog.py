@@ -236,7 +236,8 @@ def audiomack_catalog():
                 name = re.sub(r"-+", " ", name).strip()
             return name
 
-        return title_key(album.title), [(readable(slug), votes.get(slug)) for slug in links], {title_key(slug) for slug in links}
+        tracks = [(readable(slug), votes.get(slug), f"{AUDIOMACK}/embed/stewartjm/song/{slug}") for slug in links]
+        return title_key(album.title), tracks, {title_key(slug) for slug in links}
 
     album_songs = {}
     with ThreadPoolExecutor(max_workers=6) as pool:
@@ -333,10 +334,11 @@ def extract(layout, pattern):
     return match[0]
 
 
-def site_page(layout, title, main, depth, current=None, load_rails=False, load_lyrics=False):
+def site_page(layout, title, main, depth, current=None, load_rails=False, load_lyrics=False, load_playlist=False):
     prefix = "../" * depth
     header = extract(layout, r'<a class="skip-link".*?</header>')
     footer = extract(layout, r'<footer\b.*?</footer>')
+    footer = footer.replace('href="playlist/"', f'href="{prefix}playlist/"')
     footer = footer.replace('      <nav aria-label="Music platforms">', SHARE_PANEL + '      <nav aria-label="Music platforms">')
     header = header.replace(' aria-current="page"', "").replace('src="assets/', f'src="{prefix}assets/')
     header = header.replace('href="./"', f'href="{prefix}"')
@@ -346,6 +348,7 @@ def site_page(layout, title, main, depth, current=None, load_rails=False, load_l
         header = header.replace(f'href="{prefix}{current}/">', f'href="{prefix}{current}/" aria-current="page">')
     rails = f'\n  <script src="{prefix}assets/catalog.js" defer></script>' if load_rails else ""
     lyrics = f'\n  <script src="{prefix}assets/lyrics.js" defer></script>' if load_lyrics else ""
+    playlist = f'\n  <script src="{prefix}assets/playlist.js" defer></script>' if load_playlist else ""
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -356,7 +359,7 @@ def site_page(layout, title, main, depth, current=None, load_rails=False, load_l
   <link rel="manifest" href="{prefix}app.webmanifest">
   <link rel="apple-touch-icon" href="{prefix}assets/app-icon-180.png">
   <link rel="icon" href="{prefix}assets/stewart-badge.webp">
-  <link rel="stylesheet" href="{prefix}assets/catalog.css?v=red-trim1">{rails}{lyrics}
+  <link rel="stylesheet" href="{prefix}assets/catalog.css?v=playlist1">{rails}{lyrics}{playlist}
   <script src="{prefix}assets/share.js" defer></script>
 </head>
 <body>
@@ -418,7 +421,7 @@ def detail_page(release, layout):
     audio = release.category != "videos"
     if audio:
         main = main.replace('  </main>', LYRICS_PANEL + '  </main>')
-    return site_page(layout, title, main, depth=2, load_lyrics=audio)
+    return site_page(layout, title, main, depth=2, load_lyrics=audio, load_playlist=True)
 
 
 def plan(homepage, releases, album_tracks):

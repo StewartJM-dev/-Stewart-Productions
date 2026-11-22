@@ -83,9 +83,9 @@ def build_index(homepage, releases, album_songs, previous, scores):
         if album_songs is None or key not in album_songs:
             items.extend(track for track in previous.get("items", []) if track.get("kind") == "Album track" and track.get("href") == href)
             continue
-        for title, count in album_songs.get(key, ()):
+        for title, count, embed in album_songs.get(key, ()):
             track = {"title": title, "kind": "Album track", "album": album_title, "href": href,
-                     "genres": classify(title, hints.get(title_key(title), ""), item["genres"])}
+                     "genres": classify(title, hints.get(title_key(title), ""), item["genres"]), "embed": embed}
             previous_track = legacy.get(("Album track", href, title_key(title)), {})
             if count is None:
                 count = previous_track.get("likes")
