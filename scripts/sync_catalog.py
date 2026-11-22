@@ -398,11 +398,12 @@ def detail_page(release, layout):
     <h1>{title}</h1>
     <div class="media-card">
       <iframe class="video" src="{embed}" title="{title} on YouTube" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
-      <a href="{url}">Watch on YouTube</a>
+      <a class="button" href="{url}">Like on YouTube</a>
     </div>
   </main>'''
     else:
         label = f"{release.tracks} tracks" if release.tracks else ("Album" if release.category == "albums" else "Single")
+        reaction = "Favorite" if release.provider == "Audiomack" else "Like"
         size = 'class="album-player"' if release.category == "albums" else 'height="252"'
         main = f'''<main class="wrap album-page" id="main">
     <a class="back-link" href="../../{release.category}/">Back to {release.category}</a>
@@ -418,7 +419,7 @@ def detail_page(release, layout):
       <h2 id="listen-title">Listen</h2>
       <div class="media-card">
         <iframe {size} src="{embed}" title="{title} on {release.provider}" loading="lazy" allow="autoplay; encrypted-media"></iframe>
-        <a href="{url}">Open on {release.provider}</a>
+        <a class="button" href="{url}">{reaction} on {release.provider}</a>
       </div>
     </section>
   </main>'''
