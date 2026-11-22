@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Original music by John Stewart.">
+  <title>Stewart Productions</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #141714;
+      --panel: #1c211c;
+      --text: #f6f0e4;
+      --muted: #c5c7ba;
+      --accent: #e7b974;
+      --line: #45493e;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 1rem/1.55 system-ui, sans-serif;
+    }
+
+    .wrap { width: min(67rem, calc(100% - 3rem)); margin-inline: auto; }
+    .hero {
+      padding-block: clamp(3.5rem, 11vw, 8rem);
+      background: radial-gradient(ellipse at 90% 80%, #394132, transparent 65%), #191d18;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1, h2, p { margin: 0; }
+    h1, h2 { font-family: Georgia, serif; font-weight: 400; }
+    h1 { font-size: clamp(2.75rem, 9.5vw, 7rem); line-height: .99; letter-spacing: -.045em; }
+    h2 { font-size: clamp(1.7rem, 4vw, 2.55rem); line-height: 1.15; }
+    .hero p { margin-top: 1.35rem; color: var(--accent); }
+
+    .music { display: grid; gap: 1.5rem; padding-block: clamp(2rem, 6vw, 4rem); }
+    .panel { padding: clamp(1.2rem, 4vw, 2.1rem); background: var(--panel); border: 1px solid var(--line); border-radius: .6rem; }
+    .hint { color: var(--muted); margin-top: .45rem; }
+    form { margin-top: 1rem; }
+    label { display: block; font-weight: 650; margin-bottom: .4rem; }
+    .controls { display: flex; flex-wrap: wrap; gap: .6rem; }
+    input, button { font: inherit; border-radius: .3rem; padding: .65rem .85rem; }
+    input { flex: 1 1 17rem; min-width: 0; background: var(--background); border: 1px solid var(--line); color: var(--text); }
+    button { background: var(--accent); color: #1b170f; border: 1px solid transparent; font-weight: 700; cursor: pointer; }
+    button.secondary { background: transparent; color: var(--accent); border-color: var(--line); }
+    a { color: var(--accent); text-underline-offset: .22em; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .example { margin-top: .65rem; }
+    .player { margin-top: 1.25rem; }
+    iframe { display: block; width: 100%; border: 0; border-radius: .35rem; }
+    .player a { display: inline-block; margin-top: .55rem; }
+    #feedback { color: #ffb8a5; }
+    #feedback:not(:empty) { margin-top: .5rem; }
+    @media (max-width: 30rem) { .controls button { width: 100%; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <h1>Stewart Productions</h1>
+      <p>Original music by John Stewart</p>
+    </div>
+  </header>
+
+  <main class="wrap music">
+    <section id="releases" aria-label="Music releases" hidden></section>
+
+    <section class="panel" id="preview" aria-labelledby="preview-title">
+      <h2 id="preview-title">Try an Audiomack player</h2>
+      <p class="hint">Paste an Audiomack album, playlist, or song link to preview it here.</p>
+      <form id="preview-form">
+        <label for="release-url">Audiomack link</label>
+        <div class="controls">
+          <input id="release-url" type="url" inputmode="url" autocomplete="off" required
+            placeholder="https://audiomack.com/…">
+          <button type="submit">Load player</button>
+        </div>
+        <p id="feedback" role="status"></p>
+      </form>
+      <button class="secondary example" type="button" id="example">Try a sample album</button>
+      <div class="player" id="preview-player" hidden></div>
+    </section>
+  </main>
+
+  <script>
+    // Add verified public releases here. One entry creates one player.
+    const releases = [
+      // { title: "Album title", url: "https://audiomack.com/artist/album/release" },
+    ];
+
+    const audiomack = "https://audiomack.com";
+    const sample = {
+      title: "Sample album: The Well-Tempered Clavier I: Selections",
+      url: audiomack + "/johann-sebastian-bach/album/the-well-tempered-clavier-i-selections",
+    };
+
+    function parseRelease(input) {
+      const url = new URL(input.trim());
+      const hosts = ["audiomack.com", "www.audiomack.com"];
+      if (url.protocol !== "https:" || !hosts.includes(url.hostname) ||
+          url.port || url.username || url.password) {
+        throw new Error("Enter a full https://audiomack.com release link.");
+      }
+
+      const path = url.pathname.match(
+        /^\/([a-z\d][a-z\d_-]*)\/(song|album|playlist)\/([a-z\d][a-z\d_-]*)\/?$/i
+      );
+      if (!path) {
+        throw new Error("Open an album, playlist, or song on Audiomack and copy its full page link.");
+      }
+
+      const [, artist, type, slug] = path;
+      return {
+        pageUrl: audiomack + url.pathname,
+        playerUrl: `${audiomack}/embed/${type}/${artist}/${slug}`,
+        height: type === "song" ? 252 : 400,
+      };
+    }
+
+    function mountPlayer(container, release, title) {
+      const frame = document.createElement("iframe");
+      frame.src = release.playerUrl;
+      frame.title = title;
+      frame.height = release.height;
+      frame.loading = "lazy";
+      frame.allow = "autoplay";
+      frame.setAttribute("allowfullscreen", "");
+
+      const link = document.createElement("a");
+      link.href = release.pageUrl;
+      link.textContent = "Open on Audiomack";
+      container.replaceChildren(frame, link);
+      container.hidden = false;
+    }
+
+    const releaseSection = document.querySelector("#releases");
+    for (const entry of releases) {
+      const article = document.createElement("article");
+      article.className = "panel";
+      const heading = document.createElement("h2");
+      heading.textContent = entry.title;
+      const player = document.createElement("div");
+      player.className = "player";
+      mountPlayer(player, parseRelease(entry.url), entry.title);
+      article.append(heading, player);
+      releaseSection.append(article);
+    }
+
+    releaseSection.hidden = releases.length === 0;
+    document.querySelector("#preview").hidden = releases.length > 0 &&
+      !new URLSearchParams(location.search).has("test");
+
+    const form = document.querySelector("#preview-form");
+    const input = document.querySelector("#release-url");
+    const preview = document.querySelector("#preview-player");
+    const feedback = document.querySelector("#feedback");
+
+    function showPreview(title) {
+      try {
+        mountPlayer(preview, parseRelease(input.value), title);
+        feedback.textContent = "";
+      } catch (error) {
+        feedback.textContent = error.message;
+      }
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      showPreview("Audiomack player preview");
+    });
+
+    document.querySelector("#example").addEventListener("click", () => {
+      input.value = sample.url;
+      showPreview(sample.title);
+    });
+  </script>
+</body>
+</html>
