@@ -8,6 +8,8 @@
   --ink: #173327;
   --muted: #3e5548;
   --forest: #164632;
+  --red: #8b2830;
+  --red-trim: #a13b41;
   --green: #21593f;
   --cream: #fff4d9;
   --gold: #80551d;
@@ -365,3 +367,22 @@ iframe { width: 100%; display: block; border: 0; border-radius: .3rem; backgroun
 .share-control [data-share-status]:empty { display: none; }
 .share-control [data-share-status] { font-size: .91rem; }
 .share-control input { max-width: 100%; width: 16rem; padding: .4rem; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: .3rem; }
+
+.site-header { border-bottom: 3px solid var(--red-trim); }
+.site-footer { border-top: 3px solid var(--red-trim); }
+.hero-copy { box-shadow: inset 0 3px var(--red-trim); }
+.catalog-card, .home-feature-card, .media-card, .lyrics details { border-block-start: 3px solid var(--red-trim); }
+.browse-results { border-block-start-color: var(--red-trim); }
+.genre-filters button[aria-pressed="true"] { background: var(--red); }
+
+#new-or-featured .catalog-heading {
+  padding: .65rem .9rem;
+  border: 1px solid var(--gold-light);
+  border-radius: .5rem;
+  background: var(--red);
+  color: var(--cream);
+}
+#new-or-featured .rail-controls button { background: var(--cream); color: var(--ink); }
+.install-app, .upcoming-release { background: var(--red); border-color: var(--gold-light); color: var(--cream); }
+.upcoming-release p, .upcoming-release a { color: var(--cream); }
+.release-popularity { font-size: .9rem; }

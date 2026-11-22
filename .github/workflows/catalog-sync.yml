@@ -11,6 +11,7 @@ on:
       - scripts/sync_catalog.py
       - scripts/browse_catalog.py
       - scripts/lyrics_catalog.py
+      - scripts/rank_catalog.py
 
 permissions:
   contents: write

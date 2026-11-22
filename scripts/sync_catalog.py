@@ -13,6 +13,7 @@ from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 from browse_catalog import BROWSE_FILE, build_index, serialize, title_key
 from lyrics_catalog import LYRICS_FILE, LYRICS_PANEL, build_lyrics
+from rank_catalog import card_route, public_count, rank_cards, reaction_text, score_value, video_id, youtube_count
 import json
 import re
 import unicodedata
@@ -49,6 +50,7 @@ class Release:
     provider: str
     tracks: int = 0
     tags: str = ""
+    likes: int | None = None
 
 
 def fetch(url):
@@ -132,6 +134,7 @@ def audiomack_releases(document):
             title, "audiomack:" + str(item["id"]), slug, image,
             AUDIOMACK + path, AUDIOMACK + "/embed" + path, "Audiomack",
             int(item.get("trackCount") or 0),
+            likes=public_count((item.get("stats") or {}).get("favorites-raw")),
         ))
     return releases, album_tracks
 
@@ -160,7 +163,7 @@ def suno_releases(document):
                 releases.append(Release(
                     "singles", title.strip(), "suno:" + identity, slug_for(title) or identity,
                     image, SUNO + "/song/" + identity, SUNO + "/embed/" + identity, "Suno",
-                    tags=tags,
+                    tags=tags, likes=public_count(song.get("upvoteCount")),
                 ))
     if not releases:
         raise ValueError("Suno's public profile did not expose verified songs")
@@ -186,6 +189,23 @@ def youtube_releases(document):
     return releases
 
 
+def youtube_catalog(homepage):
+    releases = youtube_releases(fetch(YOUTUBE_FEED))
+    row = existing_cards(homepage)["videos"][0]
+    ids = {release.identity.split(":", 1)[1] for release in releases}
+    ids.update(video_id(card[0]) for card in re.finditer(r'<li\b[^>]*>.*?</li>', row[1], re.S))
+    ids.discard(None)
+
+    def likes(identity):
+        try:
+            return identity, youtube_count(fetch(YOUTUBE + "/watch?v=" + identity))
+        except (OSError, ValueError):
+            return identity, None
+
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        return releases, dict(pool.map(likes, sorted(ids)))
+
+
 def audiomack_catalog():
     releases, album_tracks = audiomack_releases(fetch(SOURCE_LINKS[0][1]))
 
@@ -197,7 +217,7 @@ def audiomack_catalog():
         if not links or album.tracks and len(links) < album.tracks:
             raise ValueError(f"Incomplete Audiomack tracklist for {album.title}")
         verified = set(links)
-        titles = {}
+        titles, votes = {}, {}
         for payload in structured_data(document):
             for item in objects(payload):
                 path, title = item.get("href"), item.get("title")
@@ -205,6 +225,9 @@ def audiomack_catalog():
                     slug = path.rsplit("/", 1)[1]
                     if slug in verified:
                         titles[slug] = title
+                        count = public_count((item.get("stats") or {}).get("favorites-raw"))
+                        if count is not None:
+                            votes[slug] = count
 
         def readable(slug):
             name = titles.get(slug, slug.replace("-", " ").title())
@@ -213,7 +236,7 @@ def audiomack_catalog():
                 name = re.sub(r"-+", " ", name).strip()
             return name
 
-        return title_key(album.title), [readable(slug) for slug in links], {title_key(slug) for slug in links}
+        return title_key(album.title), [(readable(slug), votes.get(slug)) for slug in links], {title_key(slug) for slug in links}
 
     album_songs = {}
     with ThreadPoolExecutor(max_workers=6) as pool:
@@ -265,12 +288,19 @@ def card_html(release, route):
 '''
 
 
-def feature_releases(homepage, routes):
+def feature_releases(homepage, routes, scores=None):
     match = re.search(r'<ul\b[^>]*\bid="new-or-featured-items"[^>]*>(.*?)</ul>', homepage, re.S)
     if not match:
         return homepage
-    previous = re.findall(r'href="((?:albums|singles|videos)/[a-zA-Z0-9_-]+/)"', match[1])
+    priority = []
+    for i, card in enumerate(re.finditer(r'<li\b[^>]*>.*?</li>', match[1], re.S)):
+        order = re.search(r'data-feature-order="([0-9]+)"', card[0])
+        priority.append((int(order[1]) if order else i, card_route(card[0])))
+    previous = [route for _, route in sorted(priority)]
     selected = list(dict.fromkeys([*routes, *previous]))[:3]
+    position = {route: i for i, route in enumerate(selected)}
+    scores = scores or {}
+    selected.sort(key=lambda route: score_value(scores, route), reverse=True)
     cards = {}
     rows = existing_cards(homepage)
     for category, kind in (("albums", "Album"), ("singles", "Single"), ("videos", "Video")):
@@ -286,10 +316,10 @@ def feature_releases(homepage, routes):
         if route not in cards:
             continue
         image, title, kind = cards[route]
-        featured.append(f'''        <li>
+        featured.append(f'''        <li data-feature-order="{position[route]}">
           <a class="home-feature-card" href="{route}">
             <img src="{image}" alt="" loading="lazy">
-            <div><p>{kind}</p><h3>{title}</h3></div>
+            <div><p>{kind}</p><h3>{title}</h3>{reaction_text(scores.get(route))}</div>
           </a>
         </li>
 ''')
@@ -326,7 +356,7 @@ def site_page(layout, title, main, depth, current=None, load_rails=False, load_l
   <link rel="manifest" href="{prefix}app.webmanifest">
   <link rel="apple-touch-icon" href="{prefix}assets/app-icon-180.png">
   <link rel="icon" href="{prefix}assets/stewart-badge.webp">
-  <link rel="stylesheet" href="{prefix}assets/catalog.css?v=lyrics-share1">{rails}{lyrics}
+  <link rel="stylesheet" href="{prefix}assets/catalog.css?v=red-trim1">{rails}{lyrics}
   <script src="{prefix}assets/share.js" defer></script>
 </head>
 <body>
@@ -457,7 +487,7 @@ def main():
         pending = {
             "Audiomack": pool.submit(audiomack_catalog),
             "Suno": pool.submit(lambda: suno_releases(fetch(SOURCE_LINKS[1][1]))),
-            "YouTube": pool.submit(lambda: youtube_releases(fetch(YOUTUBE_FEED))),
+            "YouTube": pool.submit(youtube_catalog, html),
         }
         for name, future in pending.items():
             try:
@@ -466,11 +496,18 @@ def main():
                 warnings.append(f"{name}: {error}")
     audiomack, album_tracks, album_songs = found.get("Audiomack", ([], set(), None))
     suno = found.get("Suno", [])
-    youtube = found.get("YouTube", [])
+    youtube, video_counts = found.get("YouTube", ([], {}))
     releases = [*audiomack, *suno, *youtube] if "Audiomack" in found and "Suno" in found else youtube
     changes, added = plan(html, releases, album_tracks)
-    index = build_index(changes.get("index.html", html), [*audiomack, *suno, *youtube], album_songs,
-                        json.loads(previous_index) if previous_index else None)
+    prior_index = json.loads(previous_index) if previous_index else {}
+    current = changes.get("index.html", html)
+    ranked, scores, changed_rows = rank_cards(current, existing_cards(current), [*audiomack, *suno, *youtube], video_counts, prior_index)
+    ranked = feature_releases(ranked, [], scores)
+    if ranked != html:
+        changes["index.html"] = ranked
+    for category in changed_rows | {item["category"] for item in added}:
+        changes[f"{category}/index.html"] = category_page(category, ranked)
+    index = build_index(ranked, [*audiomack, *suno, *youtube], album_songs, prior_index, scores)
     if serialize(index) != previous_index:
         changes[BROWSE_FILE] = serialize(index)
     lyrics = serialize(build_lyrics(index, suno, json.loads(previous_lyrics) if previous_lyrics else None, fetch))

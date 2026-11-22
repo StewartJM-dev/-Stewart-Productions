@@ -58,7 +58,7 @@ def release_cards(homepage):
     return items
 
 
-def build_index(homepage, releases, album_songs, previous):
+def build_index(homepage, releases, album_songs, previous, scores):
     previous = previous or {}
     legacy = {(item["kind"], item["href"], title_key(item["title"])): item
               for item in previous.get("items", [])}
@@ -71,6 +71,8 @@ def build_index(homepage, releases, album_songs, previous):
         key = title_key(item["title"])
         old = legacy.get((item["kind"], item["href"], key), {})
         item["genres"] = classify(item["title"], hints.get(key, ""), old.get("genres", ()))
+        if item["href"] in scores:
+            item["likes"], item["metric"] = scores[item["href"]]
 
     for item in list(items):
         if item["kind"] != "Album":
@@ -81,9 +83,15 @@ def build_index(homepage, releases, album_songs, previous):
         if album_songs is None or key not in album_songs:
             items.extend(track for track in previous.get("items", []) if track.get("kind") == "Album track" and track.get("href") == href)
             continue
-        for title in album_songs.get(key, ()):
-            items.append({"title": title, "kind": "Album track", "album": album_title, "href": href,
-                          "genres": classify(title, hints.get(title_key(title), ""), item["genres"])})
+        for title, count in album_songs.get(key, ()):
+            track = {"title": title, "kind": "Album track", "album": album_title, "href": href,
+                     "genres": classify(title, hints.get(title_key(title), ""), item["genres"])}
+            previous_track = legacy.get(("Album track", href, title_key(title)), {})
+            if count is None:
+                count = previous_track.get("likes")
+            if count is not None:
+                track["likes"], track["metric"] = count, "favorite"
+            items.append(track)
 
     return {"genres": GENRES, "items": items}
 

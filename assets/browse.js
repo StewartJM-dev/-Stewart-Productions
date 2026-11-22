@@ -38,7 +38,7 @@ async function start() {
       if (item.kind === "Album track" && !query.length && selected === "All") return false;
       return (selected === "All" || item.genres.includes(selected)) &&
         query.every(word => item.search.includes(word));
-    });
+    }).sort((a, b) => (b.likes ?? -1) - (a.likes ?? -1));
 
     results.replaceChildren();
     for (const item of visible) {
@@ -47,7 +47,10 @@ async function start() {
       link.href = "../" + item.href;
       link.textContent = item.title;
       const detail = document.createElement("p");
-      detail.textContent = item.album ? "Song on " + item.album : item.kind;
+      const label = item.album ? "Song on " + item.album : item.kind;
+      const count = item.likes;
+      detail.textContent = Number.isSafeInteger(count) ?
+        label + " · " + count.toLocaleString() + " " + item.metric + (count === 1 ? "" : "s") : label;
       row.append(link, detail);
       results.append(row);
     }

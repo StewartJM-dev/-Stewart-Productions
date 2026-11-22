@@ -10,21 +10,25 @@
   ],
   "items": [
     {
-      "title": "Hold the Line",
-      "kind": "Album",
-      "href": "albums/hold-the-line/",
-      "genres": [
-        "Patriotic"
-      ]
-    },
-    {
       "title": "Garage Gospel",
       "kind": "Album",
       "href": "albums/garage-gospel/",
       "genres": [
         "Faith",
         "Cars & Garage"
-      ]
+      ],
+      "likes": 1,
+      "metric": "favorite"
+    },
+    {
+      "title": "Hold the Line",
+      "kind": "Album",
+      "href": "albums/hold-the-line/",
+      "genres": [
+        "Patriotic"
+      ],
+      "likes": 0,
+      "metric": "favorite"
     },
     {
       "title": "Altars in the Wilderness",
@@ -32,7 +36,9 @@
       "href": "albums/altars-in-the-wilderness/",
       "genres": [
         "Faith"
-      ]
+      ],
+      "likes": 0,
+      "metric": "favorite"
     },
     {
       "title": "Battle Scars",
@@ -40,25 +46,9 @@
       "href": "albums/battle-scars/",
       "genres": [
         "Family & Life"
-      ]
-    },
-    {
-      "title": "Stewart Cadets",
-      "kind": "Single",
-      "href": "singles/stewart-cadets/",
-      "genres": []
-    },
-    {
-      "title": "THE STEWART ZOO",
-      "kind": "Single",
-      "href": "singles/the-stewart-zoo/",
-      "genres": []
-    },
-    {
-      "title": "All AboardWith Daniel",
-      "kind": "Single",
-      "href": "singles/all-aboardwith-daniel/",
-      "genres": []
+      ],
+      "likes": 0,
+      "metric": "favorite"
     },
     {
       "title": "No More Stinky Elephants",
@@ -66,13 +56,17 @@
       "href": "singles/no-more-stinky-elephants/",
       "genres": [
         "Funny"
-      ]
+      ],
+      "likes": 1,
+      "metric": "like"
     },
     {
       "title": "God Made the Dinosaurs",
       "kind": "Single",
       "href": "singles/god-made-the-dinosaurs/",
-      "genres": []
+      "genres": [],
+      "likes": 1,
+      "metric": "like"
     },
     {
       "title": "Are You Still Thankful",
@@ -80,15 +74,9 @@
       "href": "singles/are-you-still-thankful/",
       "genres": [
         "Thanksgiving"
-      ]
-    },
-    {
-      "title": "The Other Guy",
-      "kind": "Single",
-      "href": "singles/the-other-guy/",
-      "genres": [
-        "Faith"
-      ]
+      ],
+      "likes": 1,
+      "metric": "like"
     },
     {
       "title": "Before We Hang The Lights",
@@ -97,7 +85,53 @@
       "genres": [
         "Thanksgiving",
         "Faith"
-      ]
+      ],
+      "likes": 1,
+      "metric": "like"
+    },
+    {
+      "title": "El Roi",
+      "kind": "Single",
+      "href": "singles/el-roi/",
+      "genres": [
+        "Faith"
+      ],
+      "likes": 0,
+      "metric": "like"
+    },
+    {
+      "title": "Stewart Cadets",
+      "kind": "Single",
+      "href": "singles/stewart-cadets/",
+      "genres": [],
+      "likes": 0,
+      "metric": "like"
+    },
+    {
+      "title": "THE STEWART ZOO",
+      "kind": "Single",
+      "href": "singles/the-stewart-zoo/",
+      "genres": [],
+      "likes": 0,
+      "metric": "like"
+    },
+    {
+      "title": "All AboardWith Daniel",
+      "kind": "Single",
+      "href": "singles/all-aboardwith-daniel/",
+      "genres": [],
+      "likes": 0,
+      "metric": "like"
+    },
+    {
+      "title": "The Other Guy",
+      "kind": "Single",
+      "href": "singles/the-other-guy/",
+      "genres": [
+        "Faith"
+      ],
+      "likes": 0,
+      "metric": "like"
     },
     {
       "title": "Black Scirocco",
@@ -105,7 +139,9 @@
       "href": "singles/black-scirocco/",
       "genres": [
         "Cars & Garage"
-      ]
+      ],
+      "likes": 0,
+      "metric": "favorite"
     },
     {
       "title": "Memory Red",
@@ -113,7 +149,9 @@
       "href": "singles/memory-red/",
       "genres": [
         "Cars & Garage"
-      ]
+      ],
+      "likes": 0,
+      "metric": "favorite"
     },
     {
       "title": "Steel and Nail Prints",
@@ -122,7 +160,17 @@
       "genres": [
         "Patriotic",
         "Faith"
-      ]
+      ],
+      "likes": 8,
+      "metric": "like"
+    },
+    {
+      "title": "Final Heartbeat",
+      "kind": "Video",
+      "href": "videos/final-heartbeat/",
+      "genres": [],
+      "likes": 4,
+      "metric": "like"
     },
     {
       "title": "The Other Guy",
@@ -130,86 +178,9 @@
       "href": "videos/the-other-guy/",
       "genres": [
         "Faith"
-      ]
-    },
-    {
-      "title": "Final Heartbeat",
-      "kind": "Video",
-      "href": "videos/final-heartbeat/",
-      "genres": []
-    },
-    {
-      "title": "Hold The Line",
-      "kind": "Album track",
-      "album": "Hold the Line",
-      "href": "albums/hold-the-line/#listen",
-      "genres": [
-        "Patriotic"
-      ]
-    },
-    {
-      "title": "Not Yet Begun",
-      "kind": "Album track",
-      "album": "Hold the Line",
-      "href": "albums/hold-the-line/#listen",
-      "genres": [
-        "Patriotic"
-      ]
-    },
-    {
-      "title": "Old Ironsides",
-      "kind": "Album track",
-      "album": "Hold the Line",
-      "href": "albums/hold-the-line/#listen",
-      "genres": [
-        "Patriotic"
-      ]
-    },
-    {
-      "title": "THE MONITOR AND THE MERRIMACK",
-      "kind": "Album track",
-      "album": "Hold the Line",
-      "href": "albums/hold-the-line/#listen",
-      "genres": [
-        "Patriotic"
-      ]
-    },
-    {
-      "title": "Still There",
-      "kind": "Album track",
-      "album": "Hold the Line",
-      "href": "albums/hold-the-line/#listen",
-      "genres": [
-        "Patriotic"
-      ]
-    },
-    {
-      "title": "Every Shot Counts",
-      "kind": "Album track",
-      "album": "Hold the Line",
-      "href": "albums/hold-the-line/#listen",
-      "genres": [
-        "Patriotic"
-      ]
-    },
-    {
-      "title": "One Life",
-      "kind": "Album track",
-      "album": "Hold the Line",
-      "href": "albums/hold-the-line/#listen",
-      "genres": [
-        "Patriotic"
-      ]
-    },
-    {
-      "title": "Steel and Nail Prints",
-      "kind": "Album track",
-      "album": "Hold the Line",
-      "href": "albums/hold-the-line/#listen",
-      "genres": [
-        "Patriotic",
-        "Faith"
-      ]
+      ],
+      "likes": 2,
+      "metric": "like"
     },
     {
       "title": "Dream Garage",
@@ -309,6 +280,79 @@
       "genres": [
         "Faith",
         "Cars & Garage"
+      ]
+    },
+    {
+      "title": "Hold The Line",
+      "kind": "Album track",
+      "album": "Hold the Line",
+      "href": "albums/hold-the-line/#listen",
+      "genres": [
+        "Patriotic"
+      ]
+    },
+    {
+      "title": "Not Yet Begun",
+      "kind": "Album track",
+      "album": "Hold the Line",
+      "href": "albums/hold-the-line/#listen",
+      "genres": [
+        "Patriotic"
+      ]
+    },
+    {
+      "title": "Old Ironsides",
+      "kind": "Album track",
+      "album": "Hold the Line",
+      "href": "albums/hold-the-line/#listen",
+      "genres": [
+        "Patriotic"
+      ]
+    },
+    {
+      "title": "THE MONITOR AND THE MERRIMACK",
+      "kind": "Album track",
+      "album": "Hold the Line",
+      "href": "albums/hold-the-line/#listen",
+      "genres": [
+        "Patriotic"
+      ]
+    },
+    {
+      "title": "Still There",
+      "kind": "Album track",
+      "album": "Hold the Line",
+      "href": "albums/hold-the-line/#listen",
+      "genres": [
+        "Patriotic"
+      ]
+    },
+    {
+      "title": "Every Shot Counts",
+      "kind": "Album track",
+      "album": "Hold the Line",
+      "href": "albums/hold-the-line/#listen",
+      "genres": [
+        "Patriotic"
+      ]
+    },
+    {
+      "title": "One Life",
+      "kind": "Album track",
+      "album": "Hold the Line",
+      "href": "albums/hold-the-line/#listen",
+      "genres": [
+        "Patriotic"
+      ]
+    },
+    {
+      "title": "Steel and Nail Prints",
+      "kind": "Album track",
+      "album": "Hold the Line",
+      "href": "albums/hold-the-line/#listen",
+      "genres": [
+        "Patriotic",
+        "Faith"
       ]
     },
     {
