@@ -19,11 +19,7 @@ async function loadLyrics() {
     text.className = "lyric-text";
     text.textContent = entry.text;
 
-    const source = document.createElement("a");
-    source.href = entry.source;
-    source.textContent = "Lyrics on Suno";
-
-    details.append(summary, text, source);
+    details.append(summary, text);
     lyricsList.append(details);
   }
   lyricsPanel.hidden = false;

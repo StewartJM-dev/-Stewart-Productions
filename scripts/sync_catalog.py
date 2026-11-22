@@ -343,7 +343,7 @@ def site_page(layout, title, main, depth, current=None, load_rails=False, load_l
     header = extract(layout, r'<a class="skip-link".*?</header>')
     footer = extract(layout, r'<footer\b.*?</footer>')
     footer = footer.replace('href="playlist/"', f'href="{prefix}playlist/"')
-    footer = footer.replace('      <nav aria-label="Music platforms">', SHARE_PANEL + '      <nav aria-label="Music platforms">')
+    footer = footer.replace("    </div>", SHARE_PANEL + "    </div>", 1)
     header = header.replace(' aria-current="page"', "").replace('src="assets/', f'src="{prefix}assets/')
     header = header.replace('href="./"', f'href="{prefix}"')
     for folder in SECTION_IDS:
@@ -351,8 +351,8 @@ def site_page(layout, title, main, depth, current=None, load_rails=False, load_l
     if current:
         header = header.replace(f'href="{prefix}{current}/">', f'href="{prefix}{current}/" aria-current="page">')
     rails = f'\n  <script src="{prefix}assets/catalog.js" defer></script>' if load_rails else ""
-    lyrics = f'\n  <script src="{prefix}assets/lyrics.js" defer></script>' if load_lyrics else ""
-    playlist = f'\n  <script src="{prefix}assets/playlist.js" defer></script>' if load_playlist else ""
+    lyrics = f'\n  <script src="{prefix}assets/lyrics.js?v=internal1" defer></script>' if load_lyrics else ""
+    playlist = f'\n  <script src="{prefix}assets/playlist.js?v=internal1" defer></script>' if load_playlist else ""
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -390,7 +390,6 @@ def category_page(category, layout):
 def detail_page(release, layout):
     title = escape(release.title)
     artwork = escape(release.artwork or "../../assets/stewart-badge.webp", quote=True)
-    url = escape(release.url, quote=True)
     embed = escape(release.embed, quote=True)
     if release.category == "videos":
         main = f'''<main class="wrap video-page" id="main">
@@ -398,12 +397,10 @@ def detail_page(release, layout):
     <h1>{title}</h1>
     <div class="media-card">
       <iframe class="video" src="{embed}" title="{title} on YouTube" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
-      <a class="button" href="{url}">Like on YouTube</a>
     </div>
   </main>'''
     else:
         label = f"{release.tracks} tracks" if release.tracks else ("Album" if release.category == "albums" else "Single")
-        reaction = "Favorite" if release.provider == "Audiomack" else "Like"
         size = 'class="album-player"' if release.category == "albums" else 'height="252"'
         main = f'''<main class="wrap album-page" id="main">
     <a class="back-link" href="../../{release.category}/">Back to {release.category}</a>
@@ -419,7 +416,6 @@ def detail_page(release, layout):
       <h2 id="listen-title">Listen</h2>
       <div class="media-card">
         <iframe {size} src="{embed}" title="{title} on {release.provider}" loading="lazy" allow="autoplay; encrypted-media"></iframe>
-        <a class="button" href="{url}">{reaction} on {release.provider}</a>
       </div>
     </section>
   </main>'''

@@ -22,29 +22,6 @@ function playerUrl(link) {
   }
 }
 
-// Use the saved embed ID so this also works for previously saved playlist items.
-function reactionLink(player) {
-  const path = player.pathname.slice("/embed/".length).replace(/\/$/, "");
-  const site = new URL(player.origin);
-  let label;
-  if (player.hostname === "www.youtube.com") {
-    site.pathname = "/watch";
-    site.searchParams.set("v", path.split("/")[0]);
-    label = "Like on YouTube";
-  } else if (player.hostname === "suno.com") {
-    site.pathname = "/song/" + path.split("/")[0];
-    label = "Like on Suno";
-  } else {
-    // Audiomack also accepts player links that omit the artist slug.
-    site.pathname = "/" + (path.startsWith("stewartjm/") ? path : "stewartjm/" + path);
-    label = "Favorite on Audiomack";
-  }
-  const link = element("a", label);
-  link.className = "button";
-  link.href = site.href;
-  return link;
-}
-
 function readPlaylist() {
   try {
     const data = JSON.parse(localStorage.getItem(key));
@@ -156,7 +133,7 @@ if (document.querySelector("#playlist-page")) {
     iframe.allow = "autoplay; encrypted-media; picture-in-picture";
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
     iframe.allowFullscreen = true;
-    player.replaceChildren(iframe, reactionLink(url));
+    player.replaceChildren(iframe);
     nowPlaying.textContent = item.title;
     playback.hidden = false;
     activeId = item.id;
