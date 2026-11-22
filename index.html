@@ -9,9 +9,10 @@
   <link rel="manifest" href="app.webmanifest">
   <link rel="apple-touch-icon" href="assets/app-icon-180.png">
   <link rel="icon" href="assets/stewart-badge.webp">
-  <link rel="stylesheet" href="assets/catalog.css?v=featured1">
+  <link rel="stylesheet" href="assets/catalog.css?v=lyrics-share1">
   <script src="assets/catalog.js" defer></script>
   <script src="assets/install.js" defer></script>
+  <script src="assets/share.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -42,7 +43,14 @@
           <h1 id="welcome">Songs with a story.</h1>
           <p>Original music and videos by John Stewart, rooted in faith, family, and history.</p>
         </div>
-        <a class="button" href="albums/">Explore the albums</a>
+        <div class="hero-actions">
+          <a class="button" href="albums/">Explore the albums</a>
+      <div class="share-control" data-share-control hidden>
+        <button type="button" data-share-button>Share</button>
+        <span data-share-status role="status"></span>
+        <input type="url" data-share-url aria-label="Link to this page" readonly hidden>
+      </div>
+        </div>
       </div>
     </section>
 
@@ -58,6 +66,12 @@
       <h2 id="new-or-featured-title">New or Featured</h2>
       <ul class="home-feature-list" id="new-or-featured-items">
         <li>
+          <a class="home-feature-card" href="singles/stewart-cadets/">
+            <img src="https://cdn2.suno.ai/image_large_ec99045a-7a19-461c-95a7-1b7a85fd7dff.jpeg" alt="" loading="lazy">
+            <div><p>Single</p><h3>Stewart Cadets</h3></div>
+          </a>
+        </li>
+        <li>
           <a class="home-feature-card" href="singles/the-stewart-zoo/">
             <img src="https://cdn2.suno.ai/image_large_fc7c01a7-da0f-4946-86d3-7f572807b2c8.jpeg" alt="" loading="lazy">
             <div><p>Single</p><h3>THE STEWART ZOO</h3></div>
@@ -67,12 +81,6 @@
           <a class="home-feature-card" href="singles/all-aboardwith-daniel/">
             <img src="https://cdn2.suno.ai/image_large_9fc8f4b5-857f-46af-aab7-f1744cf22bdb.jpeg" alt="" loading="lazy">
             <div><p>Single</p><h3>All AboardWith Daniel</h3></div>
-          </a>
-        </li>
-        <li>
-          <a class="home-feature-card" href="singles/no-more-stinky-elephants/">
-            <img src="https://cdn2.suno.ai/image_large_48febd33-3ff1-4501-849f-bfa8ef03b7ec.jpeg" alt="" loading="lazy">
-            <div><p>Single</p><h3>No More Stinky Elephants</h3></div>
           </a>
         </li>
       </ul>
@@ -137,6 +145,14 @@
       </div>
       <p class="catalog-hint">Swipe left or right to browse.</p>
       <ul class="rail albums-rail" id="singles-track" aria-labelledby="singles-title" tabindex="0">
+        <li>
+          <a class="catalog-card" href="singles/stewart-cadets/" data-release-id="suno:ec99045a-7a19-461c-95a7-1b7a85fd7dff">
+            <img src="https://cdn2.suno.ai/image_large_ec99045a-7a19-461c-95a7-1b7a85fd7dff.jpeg" alt="" width="700" height="700" loading="lazy">
+            <div class="card-copy">
+              <h3>Stewart Cadets</h3>
+            </div>
+          </a>
+        </li>
         <li>
           <a class="catalog-card" href="singles/the-stewart-zoo/" data-release-id="suno:fc7c01a7-da0f-4946-86d3-7f572807b2c8">
             <img src="https://cdn2.suno.ai/image_large_fc7c01a7-da0f-4946-86d3-7f572807b2c8.jpeg" alt="" width="700" height="700" loading="lazy">

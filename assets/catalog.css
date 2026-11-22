@@ -325,3 +325,17 @@ iframe { width: 100%; display: block; border: 0; border-radius: .3rem; backgroun
 .install-app summary { min-height: 2.75rem; padding-block: .52rem; cursor: pointer; font-weight: 700; }
 .install-app summary:focus-visible { outline-color: var(--gold-light); }
 .install-app p { margin: .45rem 0; color: var(--cream); }
+
+.lyrics { max-width: 60rem; }
+.lyrics details { margin-top: .6rem; padding: .55rem 1rem; background: var(--cream); border: 1px solid var(--line); border-radius: .45rem; }
+.lyrics summary { padding-block: .3rem; cursor: pointer; font-weight: 700; }
+.lyrics .lyric-text { margin-block: .75rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.lyrics details a { display: inline-block; margin-bottom: .45rem; }
+
+.hero-actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .65rem; }
+.share-control:not([hidden]) { display: grid; justify-items: start; gap: .25rem; }
+.share-control button { min-height: 2.75rem; padding: .55rem .85rem; border: 1px solid var(--line); border-radius: .35rem; background: var(--panel); color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+.share-control button:hover { background: var(--cream); }
+.share-control [data-share-status]:empty { display: none; }
+.share-control [data-share-status] { font-size: .91rem; }
+.share-control input { max-width: 100%; width: 16rem; padding: .4rem; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: .3rem; }

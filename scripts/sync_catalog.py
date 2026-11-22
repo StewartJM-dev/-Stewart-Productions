@@ -8,9 +8,11 @@ from dataclasses import dataclass
 from html import escape, unescape
 from pathlib import Path
 from urllib.parse import urlsplit
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 from browse_catalog import BROWSE_FILE, build_index, serialize, title_key
+from lyrics_catalog import LYRICS_FILE, LYRICS_PANEL, build_lyrics
 import json
 import re
 import unicodedata
@@ -27,6 +29,12 @@ SOURCE_LINKS = (
 )
 RAILS = {"albums": "albums-track", "singles": "singles-track", "videos": "featured-track"}
 SECTION_IDS = {"albums": "albums", "singles": "singles", "videos": "featured", "about": "about", "browse": "browse"}
+SHARE_PANEL = '''      <div class="share-control" data-share-control hidden>
+        <button type="button" data-share-button>Share</button>
+        <span data-share-status role="status"></span>
+        <input type="url" data-share-url aria-label="Link to this page" readonly hidden>
+      </div>
+'''
 
 
 @dataclass(frozen=True)
@@ -295,10 +303,11 @@ def extract(layout, pattern):
     return match[0]
 
 
-def site_page(layout, title, main, depth, current=None, load_rails=False):
+def site_page(layout, title, main, depth, current=None, load_rails=False, load_lyrics=False):
     prefix = "../" * depth
     header = extract(layout, r'<a class="skip-link".*?</header>')
     footer = extract(layout, r'<footer\b.*?</footer>')
+    footer = footer.replace('      <nav aria-label="Music platforms">', SHARE_PANEL + '      <nav aria-label="Music platforms">')
     header = header.replace(' aria-current="page"', "").replace('src="assets/', f'src="{prefix}assets/')
     header = header.replace('href="./"', f'href="{prefix}"')
     for folder in SECTION_IDS:
@@ -306,6 +315,7 @@ def site_page(layout, title, main, depth, current=None, load_rails=False):
     if current:
         header = header.replace(f'href="{prefix}{current}/">', f'href="{prefix}{current}/" aria-current="page">')
     rails = f'\n  <script src="{prefix}assets/catalog.js" defer></script>' if load_rails else ""
+    lyrics = f'\n  <script src="{prefix}assets/lyrics.js" defer></script>' if load_lyrics else ""
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -316,7 +326,8 @@ def site_page(layout, title, main, depth, current=None, load_rails=False):
   <link rel="manifest" href="{prefix}app.webmanifest">
   <link rel="apple-touch-icon" href="{prefix}assets/app-icon-180.png">
   <link rel="icon" href="{prefix}assets/stewart-badge.webp">
-  <link rel="stylesheet" href="{prefix}assets/catalog.css">{rails}
+  <link rel="stylesheet" href="{prefix}assets/catalog.css?v=lyrics-share1">{rails}{lyrics}
+  <script src="{prefix}assets/share.js" defer></script>
 </head>
 <body>
   {header}
@@ -374,7 +385,10 @@ def detail_page(release, layout):
       </div>
     </section>
   </main>'''
-    return site_page(layout, title, main, depth=2)
+    audio = release.category != "videos"
+    if audio:
+        main = main.replace('  </main>', LYRICS_PANEL + '  </main>')
+    return site_page(layout, title, main, depth=2, load_lyrics=audio)
 
 
 def plan(homepage, releases, album_tracks):
@@ -424,11 +438,20 @@ def main():
     if args.commit and not re.fullmatch(r"[a-f0-9]{40}", args.commit):
         parser.error("--commit must be a full commit SHA")
     html = args.home.read_text(encoding="utf-8") if args.home else fetch(RAW + args.commit + "/index.html")
-    if args.home:
-        index_path = args.home.parent / BROWSE_FILE
-        previous_index = index_path.read_text(encoding="utf-8") if index_path.is_file() else ""
-    else:
-        previous_index = fetch(RAW + args.commit + "/" + BROWSE_FILE)
+
+    def prior(filename):
+        if args.home:
+            path = args.home.parent / filename
+            return path.read_text(encoding="utf-8") if path.is_file() else ""
+        try:
+            return fetch(RAW + args.commit + "/" + filename)
+        except HTTPError as error:
+            if error.code == 404:
+                return ""
+            raise
+
+    previous_index = prior(BROWSE_FILE)
+    previous_lyrics = prior(LYRICS_FILE)
     warnings, found = [], {}
     with ThreadPoolExecutor() as pool:
         pending = {
@@ -446,10 +469,13 @@ def main():
     youtube = found.get("YouTube", [])
     releases = [*audiomack, *suno, *youtube] if "Audiomack" in found and "Suno" in found else youtube
     changes, added = plan(html, releases, album_tracks)
-    index = serialize(build_index(changes.get("index.html", html), [*audiomack, *suno, *youtube], album_songs,
-                                  json.loads(previous_index) if previous_index else None))
-    if index != previous_index:
-        changes[BROWSE_FILE] = index
+    index = build_index(changes.get("index.html", html), [*audiomack, *suno, *youtube], album_songs,
+                        json.loads(previous_index) if previous_index else None)
+    if serialize(index) != previous_index:
+        changes[BROWSE_FILE] = serialize(index)
+    lyrics = serialize(build_lyrics(index, suno, json.loads(previous_lyrics) if previous_lyrics else None, fetch))
+    if lyrics != previous_lyrics:
+        changes[LYRICS_FILE] = lyrics
     print(json.dumps({
         "changes": changes, "added": added, "warnings": warnings,
         "observed": dict(Counter(release.provider + " " + release.category for release in [*audiomack, *suno, *youtube])),

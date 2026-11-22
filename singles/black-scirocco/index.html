@@ -9,7 +9,9 @@
   <link rel="manifest" href="../../app.webmanifest">
   <link rel="apple-touch-icon" href="../../assets/app-icon-180.png">
   <link rel="icon" href="../../assets/stewart-badge.webp">
-  <link rel="stylesheet" href="../../assets/catalog.css">
+  <link rel="stylesheet" href="../../assets/catalog.css?v=lyrics-share1">
+  <script src="../../assets/lyrics.js" defer></script>
+  <script src="../../assets/share.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -48,11 +50,20 @@
         <a href="https://audiomack.com/stewartjm/song/black-scirocco">Open on Audiomack</a>
       </div>
     </section>
+    <section class="section lyrics" id="lyrics" aria-labelledby="lyrics-title" hidden>
+      <h2 id="lyrics-title">Lyrics</h2>
+      <div id="lyrics-list"></div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <a class="wordmark" href="../../">Stewart Productions</a>
+      <div class="share-control" data-share-control hidden>
+        <button type="button" data-share-button>Share</button>
+        <span data-share-status role="status"></span>
+        <input type="url" data-share-url aria-label="Link to this page" readonly hidden>
+      </div>
       <nav aria-label="Music platforms">
         <a href="https://audiomack.com/stewartjm">Audiomack</a>
         <a href="https://www.youtube.com/@stewartproductions1982">YouTube</a>

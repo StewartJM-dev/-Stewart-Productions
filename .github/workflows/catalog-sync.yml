@@ -10,6 +10,7 @@ on:
       - .github/workflows/catalog-sync.yml
       - scripts/sync_catalog.py
       - scripts/browse_catalog.py
+      - scripts/lyrics_catalog.py
 
 permissions:
   contents: write
@@ -44,7 +45,7 @@ jobs:
           for warning in plan["warnings"]:
               print(f"::warning::{warning}")
           changes = plan["changes"]
-          catalog_indexes = {"index.html", "albums/index.html", "singles/index.html", "videos/index.html", "data/browse.json"}
+          catalog_indexes = {"index.html", "albums/index.html", "singles/index.html", "videos/index.html", "data/browse.json", "data/lyrics.json"}
           for name in changes:
               if name not in catalog_indexes and (
                   not re.fullmatch(r"(albums|singles|videos)/[a-zA-Z0-9_-]+/index\.html", name)

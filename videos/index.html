@@ -8,8 +8,9 @@
   <link rel="manifest" href="../app.webmanifest">
   <link rel="apple-touch-icon" href="../assets/app-icon-180.png">
   <link rel="icon" href="../assets/stewart-badge.webp">
-  <link rel="stylesheet" href="../assets/catalog.css">
+  <link rel="stylesheet" href="../assets/catalog.css?v=lyrics-share1">
   <script src="../assets/catalog.js" defer></script>
+  <script src="../assets/share.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -73,6 +74,11 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <span>Stewart Productions</span>
+      <div class="share-control" data-share-control hidden>
+        <button type="button" data-share-button>Share</button>
+        <span data-share-status role="status"></span>
+        <input type="url" data-share-url aria-label="Link to this page" readonly hidden>
+      </div>
       <nav aria-label="Music platforms">
         <a href="https://audiomack.com/stewartjm">Audiomack</a>
         <a href="https://suno.com/@stewartjm">Suno</a>
