@@ -53,6 +53,8 @@
     .player { margin-top: 1.25rem; }
     iframe { display: block; width: 100%; border: 0; border-radius: .35rem; }
     .player a { display: inline-block; margin-top: .55rem; }
+    .video-heading { margin: 0 0 .5rem; font-size: 1rem; }
+    .video-player { max-width: 48rem; aspect-ratio: 16 / 9; }
     #feedback { color: #ffb8a5; }
     #feedback:not(:empty) { margin-top: .5rem; }
     @media (max-width: 30rem) { .controls button { width: 100%; } }
@@ -89,7 +91,11 @@
   <script>
     // Add verified public releases here. One entry creates one player.
     const releases = [
-      { title: "Steel and Nail Prints", url: "https://audiomack.com/stewartjm/song/steel-and-nail-prints" },
+      {
+        title: "Steel and Nail Prints",
+        url: "https://audiomack.com/stewartjm/song/steel-and-nail-prints",
+        videoId: "kupLLm1yda8",
+      },
       { title: "Hold the Line", url: "https://audiomack.com/stewartjm/album/hold-the-line" },
     ];
 
@@ -148,6 +154,28 @@
       player.className = "player";
       mountPlayer(player, parseRelease(entry.url), entry.title);
       article.append(heading, player);
+      if (entry.videoId) {
+        const video = document.createElement("div");
+        video.className = "player";
+        const label = document.createElement("h3");
+        label.className = "video-heading";
+        label.textContent = "Music video";
+
+        const frame = document.createElement("iframe");
+        frame.className = "video-player";
+        frame.src = `https://www.youtube.com/embed/${entry.videoId}`;
+        frame.title = `${entry.title} music video`;
+        frame.loading = "lazy";
+        frame.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        frame.setAttribute("allowfullscreen", "");
+
+        const link = document.createElement("a");
+        link.href = `https://www.youtube.com/watch?v=${entry.videoId}`;
+        link.textContent = "Watch on YouTube";
+        video.append(label, frame, link);
+        article.append(video);
+      }
       releaseSection.append(article);
     }
 
