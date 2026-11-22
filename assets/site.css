@@ -74,12 +74,12 @@ nav a:hover { color: var(--gold); text-decoration: underline; }
 .section h2 { margin-bottom: 1rem; }
 .lede { margin-bottom: 1.3rem; }
 
+.album-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .album-card {
   display: grid;
-  grid-template-columns: 11rem minmax(0, 1fr);
+  grid-template-columns: minmax(7rem, 36%) minmax(0, 1fr);
   gap: clamp(1rem, 3vw, 2rem);
   align-items: center;
-  max-width: 48rem;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: .65rem;
@@ -122,7 +122,7 @@ iframe { width: 100%; display: block; border: 0; border-radius: .3rem; backgroun
 
 @media (max-width: 47rem) {
   .wrap { width: calc(100% - 2rem); }
-  .hero, .feature-grid, .album-hero { grid-template-columns: minmax(0, 1fr); }
+  .hero, .feature-grid, .album-hero, .album-grid { grid-template-columns: minmax(0, 1fr); }
   .hero { padding-block: 2.5rem; }
   .album-hero .cover { max-width: 23rem; }
 }
