@@ -43,8 +43,9 @@ jobs:
           for warning in plan["warnings"]:
               print(f"::warning::{warning}")
           changes = plan["changes"]
+          catalog_indexes = {"index.html", "albums/index.html", "singles/index.html", "videos/index.html"}
           for name in changes:
-              if name != "index.html" and (
+              if name not in catalog_indexes and (
                   not re.fullmatch(r"(albums|singles|videos)/[a-zA-Z0-9_-]+/index\.html", name)
                   or Path(name).exists()
               ):

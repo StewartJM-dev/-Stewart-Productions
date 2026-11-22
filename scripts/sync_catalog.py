@@ -25,6 +25,7 @@ SOURCE_LINKS = (
     ("YouTube", YOUTUBE + "/@stewartproductions1982"),
 )
 RAILS = {"albums": "albums-track", "singles": "singles-track", "videos": "featured-track"}
+SECTION_IDS = {"albums": "albums", "singles": "singles", "videos": "featured", "about": "about"}
 
 
 @dataclass(frozen=True)
@@ -244,18 +245,56 @@ def extract(layout, pattern):
     return match[0]
 
 
+def site_page(layout, title, main, depth, current=None, load_rails=False):
+    prefix = "../" * depth
+    header = extract(layout, r'<a class="skip-link".*?</header>')
+    footer = extract(layout, r'<footer\b.*?</footer>')
+    header = header.replace(' aria-current="page"', "").replace('src="assets/', f'src="{prefix}assets/')
+    header = header.replace('href="./"', f'href="{prefix}"')
+    for folder in SECTION_IDS:
+        header = header.replace(f'href="{folder}/"', f'href="{prefix}{folder}/"')
+    if current:
+        header = header.replace(f'href="{prefix}{current}/">', f'href="{prefix}{current}/" aria-current="page">')
+    rails = f'\n  <script src="{prefix}assets/catalog.js" defer></script>' if load_rails else ""
+    return f'''<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#164632">
+  <title>{title} | Stewart Productions</title>
+  <link rel="icon" href="{prefix}assets/stewart-badge.webp">
+  <link rel="stylesheet" href="{prefix}assets/catalog.css">{rails}
+</head>
+<body>
+  {header}
+
+  {main}
+
+  {footer}
+</body>
+</html>
+'''
+
+
+def category_page(category, layout):
+    section_id = SECTION_IDS[category]
+    section = extract(layout, rf'<section\b[^>]*\bid="{section_id}"[^>]*>.*?</section>')
+    section = section.replace('<h2 ', '<h1 ', 1).replace('</h2>', '</h1>', 1)
+    section = section.replace('src="assets/', 'src="../assets/')
+    section = section.replace(f'href="{category}/', 'href="')
+    main = f'<main class="catalog-page" id="main">\n    {section}\n  </main>'
+    return site_page(layout, category.title(), main, depth=1, current=category, load_rails=category != "about")
+
+
 def detail_page(release, layout):
     title = escape(release.title)
     artwork = escape(release.artwork or "../../assets/stewart-badge.webp", quote=True)
     url = escape(release.url, quote=True)
     embed = escape(release.embed, quote=True)
-    header = extract(layout, r'<a class="skip-link".*?</header>')
-    footer = extract(layout, r'<footer\b.*?</footer>')
-    header = re.sub(r'href="(#(?:albums|featured|about)|\./)"', lambda match: f'href="../../{match[1] if match[1] != "./" else ""}"', header)
-    header = header.replace(' aria-current="page"', "").replace('src="assets/', 'src="../../assets/')
     if release.category == "videos":
         main = f'''<main class="wrap video-page" id="main">
-    <a class="back-link" href="../../#featured">Back to videos</a>
+    <a class="back-link" href="../../videos/">Back to videos</a>
     <h1>{title}</h1>
     <div class="media-card">
       <iframe class="video" src="{embed}" title="{title} on YouTube" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -266,7 +305,7 @@ def detail_page(release, layout):
         label = f"{release.tracks} tracks" if release.tracks else ("Album" if release.category == "albums" else "Single")
         size = 'class="album-player"' if release.category == "albums" else 'height="252"'
         main = f'''<main class="wrap album-page" id="main">
-    <a class="back-link" href="../../#{release.category}">Back to {release.category}</a>
+    <a class="back-link" href="../../{release.category}/">Back to {release.category}</a>
     <section class="album-hero" aria-labelledby="release-title">
       <img class="cover" src="{artwork}" alt="{title} cover art" width="700" height="700" fetchpriority="high">
       <div>
@@ -283,31 +322,14 @@ def detail_page(release, layout):
       </div>
     </section>
   </main>'''
-    return f'''<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#164632">
-  <title>{title} | Stewart Productions</title>
-  <link rel="icon" href="../../assets/stewart-badge.webp">
-  <link rel="stylesheet" href="../../assets/catalog.css">
-</head>
-<body>
-  {header}
-
-  {main}
-
-  {footer}
-</body>
-</html>
-'''
+    return site_page(layout, title, main, depth=2)
 
 
 def plan(homepage, releases, album_tracks):
     cards = existing_cards(homepage)
     changes = {}
     added = []
+    changed_categories = []
     for category, (row, titles, identities, paths) in sorted(cards.items(), key=lambda item: item[1][0].start(), reverse=True):
         new_cards = []
         for release in (r for r in releases if r.category == category):
@@ -332,8 +354,11 @@ def plan(homepage, releases, album_tracks):
         if new_cards:
             start = homepage.find("\n", row.start()) + 1
             homepage = homepage[:start] + "".join(new_cards) + homepage[start:]
+            changed_categories.append(category)
     if changes:
         changes["index.html"] = homepage
+        for category in changed_categories:
+            changes[f"{category}/index.html"] = category_page(category, homepage)
     return changes, added
 
 

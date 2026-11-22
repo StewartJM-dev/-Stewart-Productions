@@ -77,7 +77,7 @@ nav { display: flex; flex-wrap: wrap; gap: .4rem 1.35rem; }
 nav a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: .94rem; }
 nav a:hover { color: var(--gold); text-decoration: underline; }
 .site-header a:focus-visible { outline-color: var(--gold-light); }
-.site-header nav a:hover { color: var(--gold-light); }
+.site-header nav a:hover, .site-header nav a[aria-current="page"] { color: var(--gold-light); text-decoration: underline; }
 
 .hero { background: var(--forest); color: var(--cream); padding-bottom: clamp(1rem, 4vw, 2.15rem); }
 .hero-visual {
@@ -139,7 +139,9 @@ nav a:hover { color: var(--gold); text-decoration: underline; }
   gap: .6rem 1rem;
   margin-bottom: 1rem;
 }
-.catalog-heading h2 { margin: 0; }
+.catalog-heading h1, .catalog-heading h2 { margin: 0; }
+.catalog-page .section { border-top: 0; }
+.catalog-page .about h1 { margin-bottom: 1rem; }
 .catalog-hint { display: none; }
 .rail-controls:not([hidden]) { display: flex; gap: .45rem; }
 .rail-controls button {
@@ -244,7 +246,8 @@ iframe { width: 100%; display: block; border: 0; border-radius: .3rem; backgroun
 
 @media (max-width: 30rem) {
   .site-header .header-inner { padding-block: .65rem .4rem; }
-  .site-header nav { width: 100%; justify-content: space-between; }
+  .site-header nav { width: 100%; justify-content: space-between; gap: .15rem; }
+  .site-header nav a { padding-inline: .25rem; }
   .hero-art { height: auto; }
   .hero-visual::after { background: linear-gradient(0deg, var(--forest), transparent 22%); }
   .about { grid-template-columns: minmax(0, 1fr); }
