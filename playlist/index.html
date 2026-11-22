@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="../assets/app-icon-180.png">
   <link rel="icon" href="../assets/stewart-badge.webp">
   <link rel="stylesheet" href="../assets/catalog.css?v=playlist1">
-  <script src="../assets/playlist.js" defer></script>
+  <script src="../assets/playlist.js?v=random1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -39,6 +39,10 @@
         <button type="submit">Save name</button>
       </div>
     </form>
+
+    <div class="playlist-actions">
+      <button type="button" id="playlist-random" disabled>Play random</button>
+    </div>
 
     <section class="section playlist-playback" id="playlist-playback" aria-labelledby="playlist-current" hidden>
       <h2 id="playlist-current"></h2>
