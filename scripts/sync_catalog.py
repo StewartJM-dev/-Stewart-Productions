@@ -363,7 +363,7 @@ def site_page(layout, title, main, depth, current=None, load_rails=False, load_l
   <link rel="manifest" href="{prefix}app.webmanifest">
   <link rel="apple-touch-icon" href="{prefix}assets/app-icon-180.png">
   <link rel="icon" href="{prefix}assets/stewart-badge.webp">
-  <link rel="stylesheet" href="{prefix}assets/catalog.css?v=playlist1">{rails}{lyrics}{playlist}
+  <link rel="stylesheet" href="{prefix}assets/catalog.css?v=studio1">{rails}{lyrics}{playlist}
   <script src="{prefix}assets/share.js" defer></script>
 </head>
 <body>

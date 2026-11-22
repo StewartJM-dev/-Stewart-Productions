@@ -9,7 +9,7 @@
   <link rel="manifest" href="app.webmanifest">
   <link rel="apple-touch-icon" href="assets/app-icon-180.png">
   <link rel="icon" href="assets/stewart-badge.webp">
-  <link rel="stylesheet" href="assets/catalog.css?v=playlist1">
+  <link rel="stylesheet" href="assets/catalog.css?v=studio1">
   <script src="assets/catalog.js" defer></script>
   <script src="assets/install.js" defer></script>
   <script src="assets/share.js" defer></script>
@@ -35,22 +35,22 @@
 
   <main id="main">
     <section class="hero" aria-labelledby="welcome">
-      <div class="hero-visual">
-        <img class="hero-art" src="assets/stewart-banner.webp" alt="A father and four boys on a filmstrip, lit by a lantern" width="1600" height="900" fetchpriority="high">
-      </div>
-      <div class="wrap hero-copy">
-        <div>
+      <div class="wrap hero-layout">
+        <div class="hero-copy">
           <h1 id="welcome">Songs with a story.</h1>
           <p>Original music and videos by John Stewart, rooted in faith, family, and history.</p>
+          <div class="hero-actions">
+            <a class="button" href="albums/">Explore the albums</a>
+            <a class="button playlist-home-link" href="playlist/">My Playlist</a>
+            <div class="share-control" data-share-control hidden>
+              <button type="button" data-share-button>Share</button>
+              <span data-share-status role="status"></span>
+              <input type="url" data-share-url aria-label="Link to this page" readonly hidden>
+            </div>
+          </div>
         </div>
-        <div class="hero-actions">
-          <a class="button" href="albums/">Explore the albums</a>
-          <a class="button playlist-home-link" href="playlist/">My Playlist</a>
-      <div class="share-control" data-share-control hidden>
-        <button type="button" data-share-button>Share</button>
-        <span data-share-status role="status"></span>
-        <input type="url" data-share-url aria-label="Link to this page" readonly hidden>
-      </div>
+        <div class="hero-visual">
+          <img class="hero-art" src="assets/stewart-banner.webp" alt="A father and four boys on a filmstrip, lit by a lantern" width="1600" height="900" fetchpriority="high">
         </div>
       </div>
     </section>
