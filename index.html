@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Original songs and music videos by John Stewart. Listen to Hold the Line and watch Steel and Nail Prints.">
-  <meta name="theme-color" content="#081725">
+  <meta name="theme-color" content="#123629">
   <title>Stewart Productions | Music by John Stewart</title>
   <link rel="icon" href="assets/stewart-badge.webp">
   <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/rails.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,7 +20,7 @@
       </a>
       <nav aria-label="Main navigation">
         <a href="#albums">Albums</a>
-        <a href="#featured">Watch</a>
+        <a href="#featured">Videos</a>
         <a href="#about">About</a>
       </nav>
     </div>
@@ -39,43 +40,71 @@
       </div>
     </section>
 
-    <section class="section wrap" id="albums" aria-labelledby="albums-title">
-      <h2 id="albums-title">Albums</h2>
-      <div class="album-grid">
-        <a class="album-card" href="albums/hold-the-line/">
-          <img class="cover" src="assets/hold-the-line.webp" alt="" width="900" height="900" loading="lazy">
-          <div>
-            <h3>Hold the Line</h3>
-            <p>Eight songs about courage, sacrifice, and holding fast when it counts.</p>
-            <span class="card-action">Listen to the album</span>
-          </div>
-        </a>
-        <a class="album-card" href="albums/garage-gospel/">
-          <img class="cover" src="assets/garage-gospel.webp" alt="" width="900" height="900" loading="lazy">
-          <div>
-            <h3>Garage Gospel</h3>
-            <p>Ten songs that bring faith into the garage and out onto the road.</p>
-            <span class="card-action">Listen to the album</span>
-          </div>
-        </a>
+    <section class="section wrap catalog" id="albums" aria-labelledby="albums-title">
+      <div class="catalog-heading">
+        <h2 id="albums-title">Albums</h2>
+        <div class="rail-controls" hidden>
+          <button type="button" aria-controls="albums-track" data-step="-1" aria-label="Previous albums">Previous</button>
+          <button type="button" aria-controls="albums-track" data-step="1" aria-label="Next albums">Next</button>
+        </div>
       </div>
+      <ul class="rail albums-rail" id="albums-track" aria-labelledby="albums-title" tabindex="0">
+        <li>
+          <a class="catalog-card" href="albums/hold-the-line/">
+            <img src="assets/hold-the-line.webp" alt="" width="900" height="900" loading="lazy">
+            <div class="card-copy">
+              <h3>Hold the Line</h3>
+              <p>8 tracks</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="catalog-card" href="albums/garage-gospel/">
+            <img src="assets/garage-gospel.webp" alt="" width="900" height="900" loading="lazy">
+            <div class="card-copy">
+              <h3>Garage Gospel</h3>
+              <p>10 tracks</p>
+            </div>
+          </a>
+        </li>
+      </ul>
     </section>
 
-    <section class="section wrap" id="featured" aria-labelledby="featured-title">
-      <h2 id="featured-title">Steel and Nail Prints</h2>
-      <p class="lede">A father and son, the USS Missouri, and a song about sacrifice and faith.</p>
-      <div class="feature-grid">
-        <div class="media-card">
-          <h3>Music video</h3>
-          <iframe class="video" src="https://www.youtube.com/embed/kupLLm1yda8" title="Steel and Nail Prints music video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          <a href="https://www.youtube.com/watch?v=kupLLm1yda8">Watch on YouTube</a>
-        </div>
-        <div class="media-card">
-          <h3>Listen to the song</h3>
-          <iframe class="song" src="https://audiomack.com/embed/stewartjm/song/steel-and-nail-prints" title="Steel and Nail Prints on Audiomack" loading="lazy" allow="autoplay"></iframe>
-          <a href="https://audiomack.com/stewartjm/song/steel-and-nail-prints">Open on Audiomack</a>
+    <section class="section wrap catalog" id="featured" aria-labelledby="featured-title">
+      <div class="catalog-heading">
+        <h2 id="featured-title">Videos</h2>
+        <div class="rail-controls" hidden>
+          <button type="button" aria-controls="featured-track" data-step="-1" aria-label="Previous videos">Previous</button>
+          <button type="button" aria-controls="featured-track" data-step="1" aria-label="Next videos">Next</button>
         </div>
       </div>
+      <ul class="rail featured-rail" id="featured-track" aria-labelledby="featured-title" tabindex="0">
+        <li>
+          <a class="catalog-card" href="videos/steel-and-nail-prints/">
+            <img src="https://i.ytimg.com/vi/kupLLm1yda8/mqdefault.jpg" alt="" width="320" height="180" loading="lazy">
+            <div class="card-copy">
+              <h3>Steel and Nail Prints</h3>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="catalog-card" href="videos/the-other-guy/">
+            <img src="https://i.ytimg.com/vi/j73djGnCSMA/mqdefault.jpg" alt="" width="320" height="180" loading="lazy">
+            <div class="card-copy">
+              <h3>The Other Guy</h3>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="catalog-card" href="videos/final-heartbeat/">
+            <img src="https://i.ytimg.com/vi/oaL2DUJOjlE/mqdefault.jpg" alt="" width="320" height="180" loading="lazy">
+            <div class="card-copy">
+              <h3>Final Heartbeat</h3>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <a class="channel-link" href="https://www.youtube.com/@stewartproductions1982">Stewart Productions on YouTube</a>
     </section>
 
     <section class="section wrap about" id="about" aria-labelledby="about-title">
@@ -92,7 +121,7 @@
       <span>Stewart Productions</span>
       <nav aria-label="Music platforms">
         <a href="https://audiomack.com/stewartjm">Audiomack</a>
-        <a href="https://www.youtube.com/@StewartProductions1982">YouTube</a>
+        <a href="https://www.youtube.com/@stewartproductions1982">YouTube</a>
       </nav>
     </div>
   </footer>
