@@ -10,6 +10,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
+from browse_catalog import BROWSE_FILE, build_index, serialize, title_key
 import json
 import re
 import unicodedata
@@ -25,7 +26,7 @@ SOURCE_LINKS = (
     ("YouTube", YOUTUBE + "/@stewartproductions1982"),
 )
 RAILS = {"albums": "albums-track", "singles": "singles-track", "videos": "featured-track"}
-SECTION_IDS = {"albums": "albums", "singles": "singles", "videos": "featured", "about": "about"}
+SECTION_IDS = {"albums": "albums", "singles": "singles", "videos": "featured", "about": "about", "browse": "browse"}
 
 
 @dataclass(frozen=True)
@@ -39,6 +40,7 @@ class Release:
     embed: str
     provider: str
     tracks: int = 0
+    tags: str = ""
 
 
 def fetch(url):
@@ -54,11 +56,6 @@ def public_image(url, domains):
     if parsed.scheme == "https" and parsed.hostname in domains and not parsed.username and not parsed.port:
         return url
     return ""
-
-
-def title_key(title):
-    title = unicodedata.normalize("NFKD", title.casefold().replace("&", " and "))
-    return "".join(char for char in title if char.isalnum())
 
 
 def slug_for(title):
@@ -150,9 +147,12 @@ def suno_releases(document):
                     song.get("imageLargeUrl") or song.get("imageUrl"),
                     {"cdn1.suno.ai", "cdn2.suno.ai", "cdn.suno.ai"},
                 )
+                metadata = song.get("metadata") or {}
+                tags = " ".join(v for v in (song.get("displayTags"), metadata.get("tags")) if isinstance(v, str))
                 releases.append(Release(
                     "singles", title.strip(), "suno:" + identity, slug_for(title) or identity,
                     image, SUNO + "/song/" + identity, SUNO + "/embed/" + identity, "Suno",
+                    tags=tags,
                 ))
     if not releases:
         raise ValueError("Suno's public profile did not expose verified songs")
@@ -181,19 +181,38 @@ def youtube_releases(document):
 def audiomack_catalog():
     releases, album_tracks = audiomack_releases(fetch(SOURCE_LINKS[0][1]))
 
-    def track_keys(album):
+    def album_tracklist(album):
         # Some tracks are unlisted outside the public album. Read its player
         # tracklist so those tracks still count when comparing Suno singles.
         document = fetch(album.embed)
-        links = set(re.findall(r'href="(?:https://audiomack\.com)?/stewartjm/song/([a-zA-Z0-9_-]+)"', document))
+        links = list(dict.fromkeys(re.findall(r'href="(?:https://audiomack\.com)?/stewartjm/song/([a-zA-Z0-9_-]+)"', document)))
         if not links or album.tracks and len(links) < album.tracks:
             raise ValueError(f"Incomplete Audiomack tracklist for {album.title}")
-        return {title_key(slug) for slug in links}
+        verified = set(links)
+        titles = {}
+        for payload in structured_data(document):
+            for item in objects(payload):
+                path, title = item.get("href"), item.get("title")
+                if isinstance(path, str) and path.startswith("/stewartjm/song/") and isinstance(title, str):
+                    slug = path.rsplit("/", 1)[1]
+                    if slug in verified:
+                        titles[slug] = title
 
+        def readable(slug):
+            name = titles.get(slug, slug.replace("-", " ").title())
+            if " " not in name and "-" in name:
+                name = re.sub(r"---(?=[sStT](?:-|$))", "’", name)
+                name = re.sub(r"-+", " ", name).strip()
+            return name
+
+        return title_key(album.title), [readable(slug) for slug in links], {title_key(slug) for slug in links}
+
+    album_songs = {}
     with ThreadPoolExecutor(max_workers=6) as pool:
-        for keys in pool.map(track_keys, (release for release in releases if release.category == "albums")):
+        for title, songs, keys in pool.map(album_tracklist, (release for release in releases if release.category == "albums")):
+            album_songs[title] = songs
             album_tracks.update(keys)
-    return releases, album_tracks
+    return releases, album_tracks, album_songs
 
 
 def existing_cards(homepage):
@@ -371,6 +390,11 @@ def main():
     if args.commit and not re.fullmatch(r"[a-f0-9]{40}", args.commit):
         parser.error("--commit must be a full commit SHA")
     html = args.home.read_text(encoding="utf-8") if args.home else fetch(RAW + args.commit + "/index.html")
+    if args.home:
+        index_path = args.home.parent / BROWSE_FILE
+        previous_index = index_path.read_text(encoding="utf-8") if index_path.is_file() else ""
+    else:
+        previous_index = fetch(RAW + args.commit + "/" + BROWSE_FILE)
     warnings, found = [], {}
     with ThreadPoolExecutor() as pool:
         pending = {
@@ -383,11 +407,15 @@ def main():
                 found[name] = future.result()
             except Exception as error:
                 warnings.append(f"{name}: {error}")
-    audiomack, album_tracks = found.get("Audiomack", ([], set()))
+    audiomack, album_tracks, album_songs = found.get("Audiomack", ([], set(), None))
     suno = found.get("Suno", [])
     youtube = found.get("YouTube", [])
     releases = [*audiomack, *suno, *youtube] if "Audiomack" in found and "Suno" in found else youtube
     changes, added = plan(html, releases, album_tracks)
+    index = serialize(build_index(changes.get("index.html", html), [*audiomack, *suno, *youtube], album_songs,
+                                  json.loads(previous_index) if previous_index else None))
+    if index != previous_index:
+        changes[BROWSE_FILE] = index
     print(json.dumps({
         "changes": changes, "added": added, "warnings": warnings,
         "observed": dict(Counter(release.provider + " " + release.category for release in [*audiomack, *suno, *youtube])),

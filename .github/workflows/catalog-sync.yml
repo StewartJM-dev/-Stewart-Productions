@@ -9,6 +9,7 @@ on:
     paths:
       - .github/workflows/catalog-sync.yml
       - scripts/sync_catalog.py
+      - scripts/browse_catalog.py
 
 permissions:
   contents: write
@@ -43,7 +44,7 @@ jobs:
           for warning in plan["warnings"]:
               print(f"::warning::{warning}")
           changes = plan["changes"]
-          catalog_indexes = {"index.html", "albums/index.html", "singles/index.html", "videos/index.html"}
+          catalog_indexes = {"index.html", "albums/index.html", "singles/index.html", "videos/index.html", "data/browse.json"}
           for name in changes:
               if name not in catalog_indexes and (
                   not re.fullmatch(r"(albums|singles|videos)/[a-zA-Z0-9_-]+/index\.html", name)
@@ -60,7 +61,7 @@ jobs:
           if git status --porcelain | grep -q .; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -- index.html albums singles videos
+            git add -- index.html albums singles videos data
             git commit -m "Sync new public music releases"
             git push origin HEAD:main
           fi
