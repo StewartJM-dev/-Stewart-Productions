@@ -666,8 +666,11 @@
       "album": "Battle Scars",
       "href": "albums/battle-scars/#listen",
       "genres": [
+        "Faith",
         "Family & Life",
-        "Rock"
+        "Rock",
+        "Christian Rock",
+        "Ballads"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/everyone-s-story"
     }
