@@ -3,209 +3,81 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Original music by John Stewart.">
-  <title>Stewart Productions</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --background: #141714;
-      --panel: #1c211c;
-      --text: #f6f0e4;
-      --muted: #c5c7ba;
-      --accent: #e7b974;
-      --line: #45493e;
-    }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--background);
-      color: var(--text);
-      font: 1rem/1.55 system-ui, sans-serif;
-    }
-
-    .wrap { width: min(67rem, calc(100% - 3rem)); margin-inline: auto; }
-    .hero {
-      padding-block: clamp(3.5rem, 11vw, 8rem);
-      background: radial-gradient(ellipse at 90% 80%, #394132, transparent 65%), #191d18;
-      border-bottom: 1px solid var(--line);
-    }
-
-    h1, h2, p { margin: 0; }
-    h1, h2 { font-family: Georgia, serif; font-weight: 400; }
-    h1 { font-size: clamp(2.75rem, 9.5vw, 7rem); line-height: .99; letter-spacing: -.045em; }
-    h2 { font-size: clamp(1.7rem, 4vw, 2.55rem); line-height: 1.15; }
-    .hero p { margin-top: 1.35rem; color: var(--accent); }
-
-    .music { display: grid; gap: 1.5rem; padding-block: clamp(2rem, 6vw, 4rem); }
-    .panel { padding: clamp(1.2rem, 4vw, 2.1rem); background: var(--panel); border: 1px solid var(--line); border-radius: .6rem; }
-    .hint { color: var(--muted); margin-top: .45rem; }
-    form { margin-top: 1rem; }
-    label { display: block; font-weight: 650; margin-bottom: .4rem; }
-    .controls { display: flex; flex-wrap: wrap; gap: .6rem; }
-    input, button { font: inherit; border-radius: .3rem; padding: .65rem .85rem; }
-    input { flex: 1 1 17rem; min-width: 0; background: var(--background); border: 1px solid var(--line); color: var(--text); }
-    button { background: var(--accent); color: #1b170f; border: 1px solid transparent; font-weight: 700; cursor: pointer; }
-    button.secondary { background: transparent; color: var(--accent); border-color: var(--line); }
-    a { color: var(--accent); text-underline-offset: .22em; }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-    .example { margin-top: .65rem; }
-    .player { margin-top: 1.25rem; }
-    iframe { display: block; width: 100%; border: 0; border-radius: .35rem; }
-    .player a { display: inline-block; margin-top: .55rem; }
-    .video-heading { margin: 0 0 .5rem; font-size: 1rem; }
-    .video-player { max-width: 48rem; aspect-ratio: 16 / 9; }
-    #feedback { color: #ffb8a5; }
-    #feedback:not(:empty) { margin-top: .5rem; }
-    @media (max-width: 30rem) { .controls button { width: 100%; } }
-  </style>
+  <meta name="description" content="Original songs and music videos by John Stewart. Listen to Hold the Line and watch Steel and Nail Prints.">
+  <meta name="theme-color" content="#081725">
+  <title>Stewart Productions | Music by John Stewart</title>
+  <link rel="icon" href="assets/stewart-badge.webp">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap">
-      <h1>Stewart Productions</h1>
-      <p>Original music by John Stewart</p>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="./" aria-current="page">Stewart Productions</a>
+      <nav aria-label="Main navigation">
+        <a href="#albums">Albums</a>
+        <a href="#featured">Watch</a>
+        <a href="#about">About</a>
+      </nav>
     </div>
   </header>
 
-  <main class="wrap music">
-    <section id="releases" aria-label="Music releases" hidden></section>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="welcome">
+      <div class="hero-copy">
+        <h1 id="welcome">Songs with a story.</h1>
+        <p>Original music and videos by John Stewart, rooted in faith, family, and history.</p>
+        <a class="button" href="#albums">Explore the albums</a>
+      </div>
+      <img class="hero-art" src="assets/stewart-banner.webp" alt="Stewart Productions: a father and four boys on a filmstrip, lit by a lantern" width="1600" height="900" fetchpriority="high">
+    </section>
 
-    <section class="panel" id="preview" aria-labelledby="preview-title">
-      <h2 id="preview-title">Try an Audiomack player</h2>
-      <p class="hint">Paste an Audiomack album, playlist, or song link to preview it here.</p>
-      <form id="preview-form">
-        <label for="release-url">Audiomack link</label>
-        <div class="controls">
-          <input id="release-url" type="url" inputmode="url" autocomplete="off" required
-            placeholder="https://audiomack.com/…">
-          <button type="submit">Load player</button>
+    <section class="section wrap" id="albums" aria-labelledby="albums-title">
+      <h2 id="albums-title">Albums</h2>
+      <a class="album-card" href="albums/hold-the-line/">
+        <img class="cover" src="assets/hold-the-line.webp" alt="" width="900" height="900" loading="lazy">
+        <div>
+          <h3>Hold the Line</h3>
+          <p>Eight songs about courage, sacrifice, and holding fast when it counts.</p>
+          <span class="card-action">Listen to the album</span>
         </div>
-        <p id="feedback" role="status"></p>
-      </form>
-      <button class="secondary example" type="button" id="example">Try a sample album</button>
-      <div class="player" id="preview-player" hidden></div>
+      </a>
+    </section>
+
+    <section class="section wrap" id="featured" aria-labelledby="featured-title">
+      <h2 id="featured-title">Steel and Nail Prints</h2>
+      <p class="lede">A father and son, the USS Missouri, and a song about sacrifice and faith.</p>
+      <div class="feature-grid">
+        <div class="media-card">
+          <h3>Music video</h3>
+          <iframe class="video" src="https://www.youtube.com/embed/kupLLm1yda8" title="Steel and Nail Prints music video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <a href="https://www.youtube.com/watch?v=kupLLm1yda8">Watch on YouTube</a>
+        </div>
+        <div class="media-card">
+          <h3>Listen to the song</h3>
+          <iframe class="song" src="https://audiomack.com/embed/stewartjm/song/steel-and-nail-prints" title="Steel and Nail Prints on Audiomack" loading="lazy" allow="autoplay"></iframe>
+          <a href="https://audiomack.com/stewartjm/song/steel-and-nail-prints">Open on Audiomack</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap about" id="about" aria-labelledby="about-title">
+      <img class="badge" src="assets/stewart-badge.webp" alt="" width="450" height="450" loading="lazy">
+      <div>
+        <h2 id="about-title">About Stewart Productions</h2>
+        <p>I'm John Stewart, a mechanic, husband, father of four, and songwriter from central Pennsylvania. I write about my Christian faith, family life, and moments in history that stay with me. Stewart Productions is where I share those songs and the videos that bring their stories to life.</p>
+      </div>
     </section>
   </main>
 
-  <script>
-    // Add verified public releases here. One entry creates one player.
-    const releases = [
-      {
-        title: "Steel and Nail Prints",
-        url: "https://audiomack.com/stewartjm/song/steel-and-nail-prints",
-        videoId: "kupLLm1yda8",
-      },
-      { title: "Hold the Line", url: "https://audiomack.com/stewartjm/album/hold-the-line" },
-    ];
-
-    const audiomack = "https://audiomack.com";
-    const sample = {
-      title: "Sample album: The Well-Tempered Clavier I: Selections",
-      url: audiomack + "/johann-sebastian-bach/album/the-well-tempered-clavier-i-selections",
-    };
-
-    function parseRelease(input) {
-      const url = new URL(input.trim());
-      const hosts = ["audiomack.com", "www.audiomack.com"];
-      if (url.protocol !== "https:" || !hosts.includes(url.hostname) ||
-          url.port || url.username || url.password) {
-        throw new Error("Enter a full https://audiomack.com release link.");
-      }
-
-      const path = url.pathname.match(
-        /^\/([a-z\d][a-z\d_-]*)\/(song|album|playlist)\/([a-z\d][a-z\d_-]*)\/?$/i
-      );
-      if (!path) {
-        throw new Error("Open an album, playlist, or song on Audiomack and copy its full page link.");
-      }
-
-      const [, artist, type, slug] = path;
-      return {
-        pageUrl: audiomack + url.pathname,
-        playerUrl: `${audiomack}/embed/${type}/${artist}/${slug}`,
-        height: type === "song" ? 252 : 400,
-      };
-    }
-
-    function mountPlayer(container, release, title) {
-      const frame = document.createElement("iframe");
-      frame.src = release.playerUrl;
-      frame.title = title;
-      frame.height = release.height;
-      frame.loading = "lazy";
-      frame.allow = "autoplay";
-      frame.setAttribute("allowfullscreen", "");
-
-      const link = document.createElement("a");
-      link.href = release.pageUrl;
-      link.textContent = "Open on Audiomack";
-      container.replaceChildren(frame, link);
-      container.hidden = false;
-    }
-
-    const releaseSection = document.querySelector("#releases");
-    for (const entry of releases) {
-      const article = document.createElement("article");
-      article.className = "panel";
-      const heading = document.createElement("h2");
-      heading.textContent = entry.title;
-      const player = document.createElement("div");
-      player.className = "player";
-      mountPlayer(player, parseRelease(entry.url), entry.title);
-      article.append(heading, player);
-      if (entry.videoId) {
-        const video = document.createElement("div");
-        video.className = "player";
-        const label = document.createElement("h3");
-        label.className = "video-heading";
-        label.textContent = "Music video";
-
-        const frame = document.createElement("iframe");
-        frame.className = "video-player";
-        frame.src = `https://www.youtube.com/embed/${entry.videoId}`;
-        frame.title = `${entry.title} music video`;
-        frame.loading = "lazy";
-        frame.referrerPolicy = "strict-origin-when-cross-origin";
-        frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        frame.setAttribute("allowfullscreen", "");
-
-        const link = document.createElement("a");
-        link.href = `https://www.youtube.com/watch?v=${entry.videoId}`;
-        link.textContent = "Watch on YouTube";
-        video.append(label, frame, link);
-        article.append(video);
-      }
-      releaseSection.append(article);
-    }
-
-    releaseSection.hidden = releases.length === 0;
-    document.querySelector("#preview").hidden = releases.length > 0 &&
-      !new URLSearchParams(location.search).has("test");
-
-    const form = document.querySelector("#preview-form");
-    const input = document.querySelector("#release-url");
-    const preview = document.querySelector("#preview-player");
-    const feedback = document.querySelector("#feedback");
-
-    function showPreview(title) {
-      try {
-        mountPlayer(preview, parseRelease(input.value), title);
-        feedback.textContent = "";
-      } catch (error) {
-        feedback.textContent = error.message;
-      }
-    }
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      showPreview("Audiomack player preview");
-    });
-
-    document.querySelector("#example").addEventListener("click", () => {
-      input.value = sample.url;
-      showPreview(sample.title);
-    });
-  </script>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Stewart Productions</span>
+      <nav aria-label="Music platforms">
+        <a href="https://audiomack.com/stewartjm">Audiomack</a>
+        <a href="https://www.youtube.com/@StewartProductions1982">YouTube</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>
