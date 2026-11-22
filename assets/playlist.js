@@ -182,7 +182,7 @@ if (document.querySelector("#playlist-page")) {
       row.append(title, actions);
       queue.append(row);
     });
-    random.disabled = data.items.length === 0;
+    if (random) random.disabled = data.items.length === 0;
     const active = data.items.findIndex(item => item.id === activeId);
     previous.disabled = active < 1;
     next.disabled = active < 0 || active === data.items.length - 1;
@@ -205,7 +205,7 @@ if (document.querySelector("#playlist-page")) {
       if (items[i]) show(items[i]);
     });
   }
-  random.addEventListener("click", () => {
+  random?.addEventListener("click", () => {
     const { items } = readPlaylist();
     const candidates = items.length > 1 ? items.filter(item => item.id !== activeId) : items;
     if (candidates.length) show(candidates[Math.floor(Math.random() * candidates.length)]);
