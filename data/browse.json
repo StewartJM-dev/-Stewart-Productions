@@ -673,6 +673,16 @@
         "Ballads"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/everyone-s-story"
+    },
+    {
+      "title": "Are You Still Thankful",
+      "kind": "Video",
+      "href": "videos/are-you-still-thankful/",
+      "genres": [
+        "Faith",
+        "Thanksgiving"
+      ],
+      "metric": "like"
     }
   ]
 }
