@@ -74,6 +74,20 @@
       "metric": "favorite"
     },
     {
+      "title": "Remember Thanksgiving",
+      "kind": "Album",
+      "href": "albums/remember-thanksgiving/",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock",
+        "Ballads"
+      ],
+      "likes": 0,
+      "metric": "favorite"
+    },
+    {
       "title": "Hold the Line",
       "kind": "Album",
       "href": "albums/hold-the-line/",
@@ -310,6 +324,18 @@
       "metric": "like"
     },
     {
+      "title": "Are You Still Thankful",
+      "kind": "Video",
+      "href": "videos/are-you-still-thankful/",
+      "genres": [
+        "Faith",
+        "Story Songs",
+        "Thanksgiving",
+        "Ballads",
+        "Cinematic"
+      ]
+    },
+    {
       "title": "Dream Garage",
       "kind": "Album track",
       "album": "Garage Gospel",
@@ -428,6 +454,164 @@
         "Rock"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/fix-whats-broke"
+    },
+    {
+      "title": "Remember Thanksgiving",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock",
+        "Ballads"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/remember-thanksgiving"
+    },
+    {
+      "title": "The Worst Thanksgiving",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock",
+        "Rock & Roll"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/the-worst-thanksgiving"
+    },
+    {
+      "title": "Still A Reason",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock",
+        "Hymns & Worship",
+        "Celtic"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/still-a-reason"
+    },
+    {
+      "title": "Altars Along The Way",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Story Songs",
+        "Thanksgiving",
+        "Rock",
+        "Hymns & Worship",
+        "Celtic"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/altars-along-the-way"
+    },
+    {
+      "title": "Enough",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock",
+        "Hymns & Worship",
+        "A Cappella"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/enough"
+    },
+    {
+      "title": "Save Us A Chair!",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Patriotic",
+        "Thanksgiving",
+        "Rock",
+        "Country Rock"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/save-us-a-chair"
+    },
+    {
+      "title": "Are You Still Thankful",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Story Songs",
+        "Thanksgiving",
+        "Rock",
+        "Ballads",
+        "Cinematic"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/are-you-still-thankful"
+    },
+    {
+      "title": "A Thanksgiving Carol",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock",
+        "Ballads"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/a-thanksgiving-carol"
+    },
+    {
+      "title": "Dancing In The Porch Light",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/dancing-in-the-porch-light"
+    },
+    {
+      "title": "Before We Hang The Lights 2",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/before-we-hang-the-lights-2"
+    },
+    {
+      "title": "Present On The Tree",
+      "kind": "Album track",
+      "album": "Remember Thanksgiving",
+      "href": "albums/remember-thanksgiving/#listen",
+      "genres": [
+        "Faith",
+        "Family & Life",
+        "Thanksgiving",
+        "Rock"
+      ],
+      "embed": "https://audiomack.com/embed/stewartjm/song/present-on-the-tree"
     },
     {
       "title": "Hold The Line",
@@ -673,16 +857,6 @@
         "Ballads"
       ],
       "embed": "https://audiomack.com/embed/stewartjm/song/everyone-s-story"
-    },
-    {
-      "title": "Are You Still Thankful",
-      "kind": "Video",
-      "href": "videos/are-you-still-thankful/",
-      "genres": [
-        "Faith",
-        "Thanksgiving"
-      ],
-      "metric": "like"
     }
   ]
 }
